@@ -1,0 +1,67 @@
+# MSIMS (Motion and Simulation System)
+
+> MSIMS (Motion and Simulation System) is a simulator and VR developer based in Batu Caves, Selangor, Malaysia. It designs and builds training simulators end to end: software, control hardware and Motion Base. Its simulators and VR modules cover agriculture, fisheries, oil palm, maritime and port operations, construction machinery and off-road driving.
+
+MSIMS Tech Services, No. 17A, Jalan SG 8/7, Taman Sri Gombak, 68100 Batu Caves, Selangor, Malaysia. Email sales@msims.tech, phone +6017-22 33 070.
+
+## Pages
+
+- [MSIMS home (English)](https://msims.tech/): sectors, platform, full simulator catalogue, services, clients, FAQ and enquiry form
+- [MSIMS laman utama (Bahasa Melayu)](https://msims.tech/ms/): the same content in Malay
+
+## Agricultural simulators
+
+- Paddy Combine Harvester Simulator (Simulator; ready to supply): Harvest, transplant and plough in the paddy field with a combine harvester, rice transplanter and disc-plough tractor. The instrument panel and control tablet change with the selected machine.
+- Agricultural Drone Simulator (Simulator; ready to supply): From equipment introduction and basic controls to spraying fertiliser and pesticide over paddy fields, Harumanis mango orchards and corn fields.
+- VR Farming (VR module; ready to supply): Farm tasks done by hand in VR, from planting paddy seedlings to milking a cow, for exhibitions and schools.
+- VR MyGAP (VR module; ready to supply): MyGAP certification good practices explored step by step on a virtual farm.
+- VR Durian & Strawberry Farm (VR module; ready to supply): A virtual visit to durian and strawberry farms for exhibitions and learning.
+- SIM-TANI 3-in-1 (Simulator; demo available): Three machines in one program: combine harvester, rice transplanter and rotovator tractor. Work-area coverage is tracked plot by plot.
+
+## Fisheries simulators
+
+- Fishing Vessel Simulator (Simulator; ready to supply): Purse seine and trawl operations with six-degree-of-freedom vessel physics, rough weather and night sailing.
+- VR Trawl Crew (VR module; ready to supply): An expo module that puts visitors on the deck of a trawler, complete with winch controls.
+- VR Sayangi Laut Kita (VR module; ready to supply): Dive in Malaysia's marine parks as a conservation diver: collecting rubbish and propagating coral against the clock.
+- VR Purse Seine Crew (VR module; demo available): Players become the crew of a fishing vessel: lowering the fish aggregating device, setting the net and hauling in the catch with hand controllers.
+
+## Oil palm simulators
+
+- SIM-SAWIT Haulage (Simulator; demo available): Hauling fresh fruit bunches with a mini tractor and trailer on an oil palm estate. Modules are structured in line with oil palm mechanisation training.
+
+## Maritime & port simulators
+
+- Patrol Boat Mission Simulator (Simulator; demo available): Six short missions inspired by maritime enforcement duties in Malaysian waters, including patrols around the Langkawi islands. Suited to exhibition visitors.
+- NAKHODA Ship Simulator (Simulator; demo available): Ship handling with a ship control console, real-time sea waves and guided control calibration.
+- STS Crane Simulator (Simulator; ready to supply): A ship-to-shore crane with container sway physics, sequenced bay plans and weather that affects trolley sway.
+
+## Construction machinery simulators
+
+- Excavator Simulator (Simulator; demo available): A crawler excavator from the cab view, with two joystick levers as the left and right consoles.
+- Backhoe Loader Simulator (Simulator; demo available): A backhoe loader with particle soil physics, working hydraulic rams and an engine start-up sequence before work begins.
+- Forklift Simulator (Simulator; demo available): Seven forklift training modules aligned with the requirements of OSHA 1994, DOSH and NIOSH.
+
+## Off-road driving simulators
+
+- 4WD Off-Road Driving Simulator (Simulator; in development): About 3 km of village road and 3 km of off-road trail through rubber and oil palm estates, to experience four-wheel-drive features.
+
+## Services
+
+- System sales: complete simulator and VR systems, installed and tested on site
+- Exhibition rental: simulator and VR units for expos, open days and outreach programmes
+- Custom development: new simulators or VR modules for an organisation's own machinery, curriculum and procedures
+
+## Clients
+
+- Kolej Pertanian Malaysia
+- Lembaga Kemajuan Ikan Malaysia (LKIM)
+- Jabatan Perikanan Malaysia
+- Institut Penyelidikan dan Kemajuan Pertanian Malaysia (MARDI)
+- Lembaga Kemajuan Pertanian Kemubu (KADA)
+- Jabatan Pertanian Negeri Perlis
+- Lembaga Pertubuhan Peladang (LPP)
+- Kolej Perikanan Sultan Nazrin Muizzuddin Shah
+- Persatuan Nelayan Kebangsaan (NEKMAT)
+- Bahagian Pembangunan Kapasiti Latihan Pertanian (BPKLP)
+- Industri Makanan dan Asas Tani (IMAT)
+- Bahagian Pemodenan Pertanian (BPP)
