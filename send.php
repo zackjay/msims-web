@@ -88,9 +88,11 @@ if ($host === '' || $sourceHost === '' || $sourceHost !== $host) {
     out(403, ['ok' => false, 'error' => 'origin']);
 }
 
-// Perangkap bot: medan tersembunyi mesti kosong. Jawab "ok" tanpa menghantar.
-if (trim((string)($_POST['website'] ?? '')) !== '') {
-    out(200, ['ok' => true]);
+// Tapis bot ringkas: skrip laman menghantar masa isian borang (ms).
+// Permintaan tanpa nilai ini, atau yang terlalu pantas, ditolak.
+$elapsed = (string)($_POST['elapsed'] ?? '');
+if (!ctype_digit($elapsed) || (int)$elapsed < 1500) {
+    out(422, ['ok' => false, 'error' => 'invalid']);
 }
 
 $name = line('name', 100);
