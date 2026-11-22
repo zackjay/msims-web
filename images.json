@@ -1,51 +1,4 @@
 {
- "bot-perikanan-pameran": {
-  "src": "Boat simulator/1000149112.jpg",
-  "crop": [
-   1280,
-   853
-  ],
-  "out": [
-   [
-    1200,
-    172322
-   ],
-   [
-    600,
-    58262
-   ]
-  ]
- },
- "jentuai-padi-pameran": {
-  "src": "Combine Harvester/1000149108.jpg",
-  "crop": [
-   1080,
-   720
-  ],
-  "out": [
-   [
-    1080,
-    151062
-   ],
-   [
-    600,
-    62716
-   ]
-  ]
- },
- "vr-durian-pavilion": {
-  "src": "VR Durian Orchid/Untitled design (4).png",
-  "crop": [
-   584,
-   389
-  ],
-  "out": [
-   [
-    584,
-    50378
-   ]
-  ]
- },
  "vr-sayangi-laut-penyu": {
   "src": "VR Sayangi Laut Kita/Screenshot 2026-02-26 135100.png",
   "crop": [
@@ -131,23 +84,6 @@
    ]
   ]
  },
- "bot-perikanan-kemudi": {
-  "src": "Boat simulator/1000149110.jpg",
-  "crop": [
-   1280,
-   853
-  ],
-  "out": [
-   [
-    1200,
-    143678
-   ],
-   [
-    600,
-    49126
-   ]
-  ]
- },
  "jentuai-padi-rig": {
   "src": "Combine Harvester/Untitled design (2).png",
   "crop": [
@@ -158,36 +94,6 @@
    [
     514,
     31372
-   ]
-  ]
- },
- "dron-kelas": {
-  "src": "Drone Simulator/Untitled design (3).png",
-  "crop": [
-   502,
-   335
-  ],
-  "out": [
-   [
-    502,
-    28984
-   ]
-  ]
- },
- "vr-pertanian-pengguna": {
-  "src": "VR Farming/IMG-20240912-WA0079.jpg",
-  "crop": [
-   1734,
-   1156
-  ],
-  "out": [
-   [
-    1200,
-    108292
-   ],
-   [
-    600,
-    41264
    ]
   ]
  },
@@ -239,6 +145,100 @@
    [
     600,
     36102
+   ]
+  ]
+ },
+ "bot-perikanan-pameran-ai": {
+  "src": "komposit wajah AI",
+  "crop": [
+   1200,
+   800
+  ],
+  "out": [
+   [
+    1200,
+    170106
+   ],
+   [
+    600,
+    64708
+   ]
+  ]
+ },
+ "jentuai-padi-pameran-ai": {
+  "src": "komposit wajah AI",
+  "crop": [
+   1080,
+   720
+  ],
+  "out": [
+   [
+    1080,
+    152026
+   ],
+   [
+    600,
+    68846
+   ]
+  ]
+ },
+ "bot-perikanan-kemudi-ai": {
+  "src": "komposit wajah AI",
+  "crop": [
+   1200,
+   800
+  ],
+  "out": [
+   [
+    1200,
+    141902
+   ],
+   [
+    600,
+    53842
+   ]
+  ]
+ },
+ "vr-durian-pavilion-ai": {
+  "src": "komposit wajah AI",
+  "crop": [
+   584,
+   389
+  ],
+  "out": [
+   [
+    584,
+    50476
+   ]
+  ]
+ },
+ "dron-kelas-ai": {
+  "src": "komposit wajah AI",
+  "crop": [
+   502,
+   335
+  ],
+  "out": [
+   [
+    502,
+    28942
+   ]
+  ]
+ },
+ "vr-pertanian-set-kepala": {
+  "src": "VR Farming/IMG-20240912-WA0079.jpg",
+  "crop": [
+   1734,
+   1156
+  ],
+  "out": [
+   [
+    1200,
+    93800
+   ],
+   [
+    600,
+    36900
    ]
   ]
  }

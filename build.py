@@ -228,13 +228,13 @@ def slug(name):
 
 # gambar kad katalog, dikunci pada nama Inggeris produk
 IMG = {
-    "Paddy Combine Harvester Simulator": ("jentuai-padi-pameran",
+    "Paddy Combine Harvester Simulator": ("jentuai-padi-pameran-ai",
         "Visitors at the MSIMS paddy combine harvester simulator, with paddy stalks in front of the screens",
         "Pengunjung di simulator jentuai padi MSIMS, dengan rumpun padi di hadapan skrin"),
-    "Agricultural Drone Simulator": ("dron-kelas",
+    "Agricultural Drone Simulator": ("dron-kelas-ai",
         "Trainees holding remote controllers watch a drone view over paddy fields on a large screen",
         "Pelatih memegang alat kawalan jauh sambil melihat pandangan dron di atas sawah pada skrin besar"),
-    "VR Farming": ("vr-pertanian-pengguna",
+    "VR Farming": ("vr-pertanian-set-kepala",
         "Person wearing a VR headset reaching down during a virtual farming task",
         "Pengguna memakai set kepala VR sedang menunduk melakukan tugasan ladang maya"),
     "VR MyGAP": ("vr-mygap-stesen",
@@ -243,7 +243,7 @@ IMG = {
     "VR Durian &amp; Strawberry Farm": ("vr-strawberi-petik",
         "VR hand picking a ripe strawberry in a virtual greenhouse",
         "Tangan VR memetik strawberi masak di rumah hijau maya"),
-    "Fishing Vessel Simulator": ("bot-perikanan-kemudi",
+    "Fishing Vessel Simulator": ("bot-perikanan-kemudi-ai",
         "Man at the wheel of the MSIMS fishing vessel simulator facing large sea-view screens",
         "Lelaki mengemudi simulator bot perikanan MSIMS menghadap skrin besar pemandangan laut"),
     "VR Trawl Crew": ("vr-pukat-tunda-geladak",
@@ -257,13 +257,13 @@ PRODUCTS.sort(key=lambda p: p[3][0] not in IMG)  # produk bergambar dahulu; susu
 
 # (fail, tajuk, kapsyen, alt)
 SLIDES = [
-    ("bot-perikanan-pameran", ("Fishing Vessel Simulator", "Simulator Bot Perikanan"),
+    ("bot-perikanan-pameran-ai", ("Fishing Vessel Simulator", "Simulator Bot Perikanan"),
      ("A visitor takes the helm at an exhibition booth while others look on.", "Seorang pengunjung mengemudi di reruai pameran sambil diperhatikan orang ramai."),
      ("Man steering the MSIMS fishing vessel simulator at an exhibition, with a crowd watching", "Lelaki mengemudi simulator bot perikanan MSIMS di pameran, diperhatikan orang ramai")),
-    ("jentuai-padi-pameran", ("Paddy Combine Harvester Simulator", "Simulator Jentuai Padi"),
+    ("jentuai-padi-pameran-ai", ("Paddy Combine Harvester Simulator", "Simulator Jentuai Padi"),
      ("Visitors try the harvester controls at a booth dressed with paddy stalks.", "Pengunjung mencuba kawalan jentuai di reruai yang dihias rumpun padi."),
      ("Visitors at the controls of the MSIMS combine harvester simulator at an exhibition", "Pengunjung di kawalan simulator jentuai MSIMS di sebuah pameran")),
-    ("vr-durian-pavilion", ("VR Durian Experience", "Pengalaman VR Durian"),
+    ("vr-durian-pavilion-ai", ("VR Durian Experience", "Pengalaman VR Durian"),
      ("A visitor explores the virtual durian orchard at a Malaysia pavilion.", "Seorang pengunjung meneroka dusun durian maya di pavilion Malaysia."),
      ("Visitor wearing a VR headset at the Virtual Durian Experience booth in a Malaysia pavilion", "Pengunjung memakai set kepala VR di reruai Virtual Durian Experience dalam pavilion Malaysia")),
     ("vr-sayangi-laut-penyu", ("VR Sayangi Laut Kita", "VR Sayangi Laut Kita"),
@@ -628,7 +628,7 @@ BODY = f'''<body>
 <footer class="site">
   <div class="wrap">
     <img src="@@R@@assets/msims-logo-putih.svg" alt="MSIMS, Motion and Simulation System" width="204" height="60">
-    <p>[[© 2026 MSIMS Tech Services<br>Simulators and VR built in Malaysia||© 2026 MSIMS Tech Services<br>Simulator dan VR buatan Malaysia]]</p>
+    <p>[[© 2026 MSIMS Tech Services<br>Simulators and VR built in Malaysia<br><small>Faces in exhibition photos have been altered to protect privacy.</small>||© 2026 MSIMS Tech Services<br>Simulator dan VR buatan Malaysia<br><small>Wajah dalam foto pameran telah diubah untuk melindungi privasi.</small>]]</p>
   </div>
 </footer>
 '''
