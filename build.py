@@ -628,7 +628,7 @@ BODY = f'''<body>
 <footer class="site">
   <div class="wrap">
     <img src="@@R@@assets/msims-logo-putih.svg" alt="MSIMS, Motion and Simulation System" width="204" height="60">
-    <p>[[© 2026 MSIMS Tech Services<br>Simulators and VR built in Malaysia<br><small>Faces in exhibition photos have been altered to protect privacy.</small>||© 2026 MSIMS Tech Services<br>Simulator dan VR buatan Malaysia<br><small>Wajah dalam foto pameran telah diubah untuk melindungi privasi.</small>]]</p>
+    <p>[[© 2026 MSIMS Tech Services<br>Simulators and VR built in Malaysia||© 2026 MSIMS Tech Services<br>Simulator dan VR buatan Malaysia]]</p>
   </div>
 </footer>
 '''
