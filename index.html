@@ -60,17 +60,18 @@ p{margin:0}
 
 /* kepala */
 .top{position:sticky;top:0;z-index:20;background:rgba(5,11,28,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:20px;min-height:64px}
-/* logo rasmi (versi gelap). Di kepala hanya tanda kata dipaparkan: bingkai memangkas baris tagline, fail logo tidak diubah. */
-.brand{display:block;flex:none;height:36px;overflow:hidden;text-decoration:none}
-.brand img{display:block;height:47.7px;width:auto;max-width:none}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:86px}
+/* logo rasmi versi putih, penuh bersama tagline */
+.brand{display:block;flex:none;text-decoration:none}
+.brand img{display:block;height:60px;width:auto}
 .top nav{margin-left:auto;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
 .top nav::-webkit-scrollbar{display:none}
 .top nav a{font:500 .92rem/1 var(--f-body);padding:.7em .8em;text-decoration:none;color:var(--muted);white-space:nowrap}
 .top nav a:hover{color:var(--ink)}
 .top .btn{flex:none}
 @media (max-width:860px){.top .wrap{gap:10px}.top nav a{padding:.7em .55em}}
-@media (max-width:560px){.top nav{display:none}.top .lang{margin-left:auto}.brand{height:30px}.brand img{height:39.8px}.top .btn.small{padding:.6em .7em;font-size:.82rem}}
+@media (max-width:560px){.top nav{display:none}.top .lang{margin-left:auto}.brand img{height:48px}.top .btn.small{padding:.6em .7em;font-size:.82rem}}
+@media (max-width:440px){.top .btn{display:none}}
 
 /* hero */
 .hero{padding-block:clamp(36px,6vw,80px) clamp(40px,6vw,72px);background:
@@ -124,7 +125,7 @@ p{margin:0}
   repeating-linear-gradient(90deg,var(--muted) 0 1px,transparent 1px 60px) 0 100%/100% 12px no-repeat,
   repeating-linear-gradient(90deg,var(--line) 0 1px,transparent 1px 12px) 0 100%/100% 6px no-repeat;opacity:.7}
 
-section{padding-block:clamp(56px,8vw,104px);scroll-margin-top:70px}
+section{padding-block:clamp(56px,8vw,104px);scroll-margin-top:92px}
 .head{display:grid;gap:14px;margin-bottom:clamp(28px,4vw,48px)}
 
 /* sektor */
@@ -211,7 +212,7 @@ button[disabled]{opacity:.6;cursor:progress}
 
 footer.site{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:.9rem}
 footer.site .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;align-items:center}
-footer.site img{display:block;width:min(240px,60vw);height:auto}
+footer.site img{display:block;width:min(288px,70vw);height:auto}
 footer.site p{line-height:1.5}
 
 /* pemilih bahasa */
@@ -227,7 +228,7 @@ footer.site p{line-height:1.5}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#atas" aria-label="MSIMS, back to top"><img src="assets/msims-logo-gelap.svg" alt="MSIMS" width="162" height="48"></a>
+    <a class="brand" href="#atas" aria-label="MSIMS, back to top"><img src="assets/msims-logo-putih.svg" alt="MSIMS, Motion and Simulation System" width="204" height="60"></a>
     <nav aria-label="Main">
       <a href="#sektor" data-i="t4">Sectors</a>
       <a href="#platform" data-i="t5">Platform</a>
@@ -635,7 +636,7 @@ footer.site p{line-height:1.5}
 
 <footer class="site">
   <div class="wrap">
-    <img src="assets/msims-logo-gelap.svg" alt="MSIMS, Motion and Simulation System" width="240" height="71">
+    <img src="assets/msims-logo-putih.svg" alt="MSIMS, Motion and Simulation System" width="288" height="85">
     <p data-i="t239">© 2026 MSIMS Tech Services<br>Simulators and VR built in Malaysia</p>
   </div>
 </footer>
