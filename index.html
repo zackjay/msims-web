@@ -6,21 +6,24 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Laman MSIMS Beta</title>
 <meta name="description" content="MSIMS (Motion and Simulation System) membina sistem simulator dan VR latihan buatan Malaysia untuk pertanian, perikanan, sawit, maritim, binaan dan pandu lasak.">
+<link rel="icon" type="image/png" href="assets/msims-ikon-256.png">
+<link rel="apple-touch-icon" href="assets/msims-ikon-256.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Saira:wght@400;500;600&family=Saira+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  /* Arah: kokpit waktu malam. Hero = teks di kiri, konsol simulasi hidup di kanan (satu-satunya tempat yang berani).
+  /* Arah: kokpit waktu malam dalam biru jenama MSIMS (#4E7AFF, latar nila logo). Hero = teks di kiri, konsol simulasi hidup di kanan (satu-satunya tempat yang berani).
      Seksyen lain senyap: baris jadual, grid bergaris halus, pembaris instrumen sebagai pemisah. Satu tema gelap, dengan sengaja. */
-  --bg:#05151a;
-  --panel:#0a2128;
-  --panel-2:#0e2b33;
-  --line:#1c3e47;
-  --ink:#eaf3f0;
-  --muted:#9bb3b2;
+  --bg:#050b1c;
+  --panel:#0a1430;
+  --panel-2:#0f1c40;
+  --line:#1d2d5a;
+  --ink:#eef2fb;
+  --muted:#9aa8c7;
   --amber:#ffb43a;
-  --signal:#62e0cf;
+  --signal:#6a90ff;
+  --brand:#4e7aff;
   --s-padi:#c9d94a;
   --s-ikan:#4fd3e6;
   --s-sawit:#ff8a3c;
@@ -56,22 +59,22 @@ p{margin:0}
 .beta b{font-weight:500;letter-spacing:.14em}
 
 /* kepala */
-.top{position:sticky;top:0;z-index:20;background:rgba(5,21,26,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top{position:sticky;top:0;z-index:20;background:rgba(5,11,28,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:20px;min-height:64px}
-.brand{display:flex;align-items:baseline;gap:.5em;text-decoration:none;flex:none}
-.brand strong{font:800 1.75rem/1 var(--f-display);letter-spacing:.06em;border-bottom:3px solid var(--amber);padding-bottom:2px}
-.brand span{font:400 .68rem/1.2 var(--f-mono);letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+/* logo rasmi (versi gelap). Di kepala hanya tanda kata dipaparkan: bingkai memangkas baris tagline, fail logo tidak diubah. */
+.brand{display:block;flex:none;height:36px;overflow:hidden;text-decoration:none}
+.brand img{display:block;height:47.7px;width:auto;max-width:none}
 .top nav{margin-left:auto;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
 .top nav::-webkit-scrollbar{display:none}
 .top nav a{font:500 .92rem/1 var(--f-body);padding:.7em .8em;text-decoration:none;color:var(--muted);white-space:nowrap}
 .top nav a:hover{color:var(--ink)}
 .top .btn{flex:none}
-@media (max-width:860px){.brand span{display:none}.top .wrap{gap:10px}.top nav a{padding:.7em .55em}}
+@media (max-width:860px){.top .wrap{gap:10px}.top nav a{padding:.7em .55em}}
 @media (max-width:560px){.top nav{display:none}.top .btn{margin-left:auto}}
 
 /* hero */
 .hero{padding-block:clamp(36px,6vw,80px) clamp(40px,6vw,72px);background:
-  radial-gradient(900px 480px at 82% 20%,rgba(98,224,207,.08),transparent 70%),
+  radial-gradient(900px 480px at 82% 20%,rgba(78,122,255,.16),transparent 70%),
   radial-gradient(700px 400px at 0% 100%,rgba(255,180,58,.06),transparent 70%)}
 .hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4vw,56px);align-items:center}
 .hero h1{font-size:clamp(2.5rem,5.4vw,4.75rem);font-weight:800;line-height:.95;margin-top:.35em}
@@ -93,7 +96,7 @@ p{margin:0}
 .tabs button{flex:1 0 auto;font:500 .78rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:transparent;border:0;border-bottom:2px solid transparent;padding:12px 12px 10px;cursor:pointer}
 .tabs button:hover{color:var(--ink)}
 .tabs button[aria-selected="true"]{color:var(--sc);border-bottom-color:var(--sc);background:var(--panel-2)}
-.view{position:relative;aspect-ratio:16/9;min-height:240px;background:#061a20;overflow:hidden}
+.view{position:relative;aspect-ratio:16/9;min-height:240px;background:#060d22;overflow:hidden}
 .view canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hud{position:absolute;top:12px;font:500 .7rem/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);pointer-events:none}
 .hud b{display:block;font-weight:500;color:var(--sc);font-size:.86rem;letter-spacing:.06em}
@@ -159,7 +162,7 @@ tbody th{font-weight:500;color:var(--muted);width:22%}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
 .filters button{--c:var(--ink);font:500 .82rem/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--line);padding:.75em .9em;cursor:pointer;border-radius:2px}
 .filters button:hover{color:var(--ink);border-color:var(--muted)}
-.filters button[aria-pressed="true"]{color:#06161b;background:var(--c);border-color:var(--c)}
+.filters button[aria-pressed="true"]{color:#050b1c;background:var(--c);border-color:var(--c)}
 .filters button span{opacity:.7;margin-left:.4em}
 .legend{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0 0 22px;padding:0;list-style:none;color:var(--muted);font-size:.9rem}
 .st{display:inline-flex;align-items:center;gap:.5em;font:500 .7rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
@@ -167,8 +170,8 @@ tbody th{font-weight:500;color:var(--muted);width:22%}
 .st-sedia::before{background:var(--ink)}
 .st-demo::before{background:linear-gradient(90deg,var(--ink) 50%,transparent 50%)}
 .st-bina{color:var(--muted)}
-.prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
-.prod{--c:var(--muted);background:var(--bg);padding:20px 20px 18px;display:flex;flex-direction:column;gap:10px;border-top:3px solid var(--c);min-width:0}
+.prods{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:0;border-left:1px solid var(--line)}
+.prod{--c:var(--muted);background:var(--bg);padding:20px 20px 18px;display:flex;flex-direction:column;gap:10px;border-top:3px solid var(--c);border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0}
 .prod[hidden]{display:none}
 .prod header{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .prod .tag{font:500 .7rem/1 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
@@ -210,7 +213,9 @@ textarea{resize:vertical;min-height:84px}
 .hint{font-size:.88rem;color:var(--muted);line-height:1.45}
 
 footer.site{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:.9rem}
-footer.site .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between}
+footer.site .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;align-items:center}
+footer.site img{display:block;width:min(240px,60vw);height:auto}
+footer.site p{line-height:1.5}
 </style>
 </head>
 <body>
@@ -219,7 +224,7 @@ footer.site .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:spac
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#atas" aria-label="MSIMS, ke atas laman"><strong>MSIMS</strong><span>Motion and<br>Simulation System</span></a>
+    <a class="brand" href="#atas" aria-label="MSIMS, ke atas laman"><img src="assets/msims-logo-gelap.svg" alt="MSIMS" width="162" height="48"></a>
     <nav aria-label="Navigasi utama">
       <a href="#sektor">Sektor</a>
       <a href="#platform">Platform</a>
@@ -624,8 +629,8 @@ footer.site .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:spac
 
 <footer class="site">
   <div class="wrap">
-    <span>© 2026 MSIMS Tech Services · Motion and Simulation System</span>
-    <span>Simulator dan VR buatan Malaysia</span>
+    <img src="assets/msims-logo-gelap.svg" alt="MSIMS, Motion and Simulation System" width="240" height="71">
+    <p>© 2026 MSIMS Tech Services<br>Simulator dan VR buatan Malaysia</p>
   </div>
 </footer>
 
@@ -691,7 +696,7 @@ footer.site .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:spac
 
   /* ---------- konsol simulasi (kanvas) ---------- */
   var cv=$("sim"),ctx=cv.getContext("2d"),view=cv.parentElement,con=$("console");
-  var BG="#061a20";
+  var BG="#060d22";
 
   function hash(i,j){var n=Math.imul(i,374761393)+Math.imul(j,668265263)|0;n=Math.imul(n^(n>>>13),1274126177);n=n^(n>>>16);return (n>>>0)/4294967295}
   function vn(x,y){var xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi;var u=xf*xf*(3-2*xf),v=yf*yf*(3-2*yf);
@@ -796,8 +801,8 @@ footer.site .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:spac
     /* penunjuk Motion Base */
     var R=Math.min(34,H*.11),gx=W-R-18,gy=H-R-18;
     ctx.save();ctx.translate(gx,gy);
-    ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);ctx.fillStyle="rgba(6,26,32,.78)";ctx.fill();
-    ctx.strokeStyle="rgba(155,179,178,.55)";ctx.lineWidth=1;ctx.stroke();
+    ctx.beginPath();ctx.arc(0,0,R,0,Math.PI*2);ctx.fillStyle="rgba(6,13,34,.8)";ctx.fill();
+    ctx.strokeStyle="rgba(154,168,199,.55)";ctx.lineWidth=1;ctx.stroke();
     ctx.beginPath();ctx.moveTo(-R-5,0);ctx.lineTo(-R+4,0);ctx.moveTo(R-4,0);ctx.lineTo(R+5,0);ctx.stroke();
     ctx.rotate(Math.max(-1,Math.min(1,roll*3)));
     var py=Math.max(-R*.6,Math.min(R*.6,-pitch*R*5));
@@ -806,7 +811,7 @@ footer.site .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:spac
     ctx.beginPath();ctx.arc(0,py,2.5,0,Math.PI*2);ctx.fillStyle=rgba(col,1);ctx.fill();
     ctx.restore();
     ctx.font="500 9px 'JetBrains Mono',ui-monospace,Consolas,monospace";
-    ctx.fillStyle="rgba(155,179,178,.9)";ctx.textAlign="center";
+    ctx.fillStyle="rgba(154,168,199,.9)";ctx.textAlign="center";
     ctx.fillText("MOTION BASE",gx,gy-R-8);
   }
 
