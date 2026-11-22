@@ -1,0 +1,245 @@
+{
+ "bot-perikanan-pameran": {
+  "src": "Boat simulator/1000149112.jpg",
+  "crop": [
+   1280,
+   853
+  ],
+  "out": [
+   [
+    1200,
+    172322
+   ],
+   [
+    600,
+    58262
+   ]
+  ]
+ },
+ "jentuai-padi-pameran": {
+  "src": "Combine Harvester/1000149108.jpg",
+  "crop": [
+   1080,
+   720
+  ],
+  "out": [
+   [
+    1080,
+    151062
+   ],
+   [
+    600,
+    62716
+   ]
+  ]
+ },
+ "vr-durian-pavilion": {
+  "src": "VR Durian Orchid/Untitled design (4).png",
+  "crop": [
+   584,
+   389
+  ],
+  "out": [
+   [
+    584,
+    50378
+   ]
+  ]
+ },
+ "vr-sayangi-laut-penyu": {
+  "src": "VR Sayangi Laut Kita/Screenshot 2026-02-26 135100.png",
+  "crop": [
+   1377,
+   918
+  ],
+  "out": [
+   [
+    1200,
+    74028
+   ],
+   [
+    600,
+    34930
+   ]
+  ]
+ },
+ "vr-pukat-tunda-krew": {
+  "src": "VR Krew Pukat Tunda/Screenshot 2026-02-26 141932.png",
+  "crop": [
+   1618,
+   1079
+  ],
+  "out": [
+   [
+    1200,
+    58706
+   ],
+   [
+    600,
+    28918
+   ]
+  ]
+ },
+ "dron-pelatih": {
+  "src": "Drone Simulator/WhatsApp Image 2026-02-19 at 00.54.53.jpeg",
+  "crop": [
+   1080,
+   720
+  ],
+  "out": [
+   [
+    1080,
+    53114
+   ],
+   [
+    600,
+    24774
+   ]
+  ]
+ },
+ "vr-durian-belah": {
+  "src": "VR Durian Orchid/Screenshot 2026-02-26 134441.png",
+  "crop": [
+   1344,
+   896
+  ],
+  "out": [
+   [
+    1200,
+    175572
+   ],
+   [
+    600,
+    73654
+   ]
+  ]
+ },
+ "vr-mygap-stesen": {
+  "src": "VR MyGAP V2.0/Screenshot 2026-02-26 133711.png",
+  "crop": [
+   1618,
+   1079
+  ],
+  "out": [
+   [
+    1200,
+    39356
+   ],
+   [
+    600,
+    19682
+   ]
+  ]
+ },
+ "bot-perikanan-kemudi": {
+  "src": "Boat simulator/1000149110.jpg",
+  "crop": [
+   1280,
+   853
+  ],
+  "out": [
+   [
+    1200,
+    143678
+   ],
+   [
+    600,
+    49126
+   ]
+  ]
+ },
+ "jentuai-padi-rig": {
+  "src": "Combine Harvester/Untitled design (2).png",
+  "crop": [
+   514,
+   342
+  ],
+  "out": [
+   [
+    514,
+    31372
+   ]
+  ]
+ },
+ "dron-kelas": {
+  "src": "Drone Simulator/Untitled design (3).png",
+  "crop": [
+   502,
+   335
+  ],
+  "out": [
+   [
+    502,
+    28984
+   ]
+  ]
+ },
+ "vr-pertanian-pengguna": {
+  "src": "VR Farming/IMG-20240912-WA0079.jpg",
+  "crop": [
+   1734,
+   1156
+  ],
+  "out": [
+   [
+    1200,
+    108292
+   ],
+   [
+    600,
+    41264
+   ]
+  ]
+ },
+ "vr-strawberi-petik": {
+  "src": "VR Durian Orchid/Screenshot 2026-02-26 134645.png",
+  "crop": [
+   1360,
+   907
+  ],
+  "out": [
+   [
+    1200,
+    101924
+   ],
+   [
+    600,
+    45024
+   ]
+  ]
+ },
+ "vr-pukat-tunda-geladak": {
+  "src": "VR Krew Pukat Tunda/Screenshot 2026-02-26 142013.png",
+  "crop": [
+   1480,
+   986
+  ],
+  "out": [
+   [
+    1200,
+    45482
+   ],
+   [
+    600,
+    21326
+   ]
+  ]
+ },
+ "vr-sayangi-laut-karang": {
+  "src": "VR Sayangi Laut Kita/Screenshot 2026-02-26 135232.png",
+  "crop": [
+   1458,
+   972
+  ],
+  "out": [
+   [
+    1200,
+    72492
+   ],
+   [
+    600,
+    36102
+   ]
+  ]
+ }
+}
