@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Laman MSIMS Beta</title>
-<meta name="description" content="MSIMS (Motion and Simulation System) membina sistem simulator dan VR latihan buatan Malaysia untuk pertanian, perikanan, sawit, maritim, binaan dan pandu lasak.">
+<meta name="description" content="MSIMS (Motion and Simulation System) builds Malaysian-made training simulators and VR systems for agriculture, fisheries, oil palm, maritime, construction and off-road driving.">
 <link rel="icon" type="image/png" href="assets/msims-ikon-256.png">
 <link rel="apple-touch-icon" href="assets/msims-ikon-256.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,14 +70,14 @@ p{margin:0}
 .top nav a:hover{color:var(--ink)}
 .top .btn{flex:none}
 @media (max-width:860px){.top .wrap{gap:10px}.top nav a{padding:.7em .55em}}
-@media (max-width:560px){.top nav{display:none}.top .btn{margin-left:auto}}
+@media (max-width:560px){.top nav{display:none}.top .lang{margin-left:auto}.brand{height:30px}.brand img{height:39.8px}.top .btn.small{padding:.6em .7em;font-size:.82rem}}
 
 /* hero */
 .hero{padding-block:clamp(36px,6vw,80px) clamp(40px,6vw,72px);background:
   radial-gradient(900px 480px at 82% 20%,rgba(78,122,255,.16),transparent 70%),
   radial-gradient(700px 400px at 0% 100%,rgba(255,180,58,.06),transparent 70%)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4vw,56px);align-items:center}
-.hero h1{font-size:clamp(2.5rem,5.4vw,4.75rem);font-weight:800;line-height:.95;margin-top:.35em}
+.hero-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,7fr);gap:clamp(28px,4vw,56px);align-items:center}
+.hero h1{font-size:clamp(2.3rem,4.5vw,4.1rem);font-weight:800;line-height:.95;margin-top:.35em}
 .hero h1 em{font-style:normal;color:var(--amber)}
 .hero .lede{margin-top:1.2em;color:var(--muted);max-width:54ch}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:1.7em}
@@ -99,6 +99,7 @@ p{margin:0}
 .view{position:relative;aspect-ratio:16/9;min-height:240px;background:#060d22;overflow:hidden}
 .view canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hud{position:absolute;top:12px;font:500 .7rem/1.5 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+.hud span{display:block}
 .hud b{display:block;font-weight:500;color:var(--sc);font-size:.86rem;letter-spacing:.06em}
 .hud.l{left:14px}
 .hud.r{right:14px;text-align:right}
@@ -151,19 +152,13 @@ section{padding-block:clamp(56px,8vw,104px);scroll-margin-top:70px}
 .caps dt{font:600 1.3rem/1.15 var(--f-display);text-transform:uppercase;letter-spacing:.02em}
 .caps dd{margin:6px 0 0;color:var(--muted);font-size:.98rem;line-height:1.5}
 @media (max-width:760px){.caps{grid-template-columns:minmax(0,1fr)}}
-.tbl{overflow-x:auto;margin-top:clamp(28px,4vw,44px)}
-table{border-collapse:collapse;width:100%;min-width:560px;font-size:.98rem}
-caption{text-align:left;font:600 1.3rem/1.2 var(--f-display);text-transform:uppercase;letter-spacing:.02em;padding-bottom:12px}
-th,td{text-align:left;padding:12px 16px 12px 0;border-top:1px solid var(--line);vertical-align:top;line-height:1.45}
-thead th{font:500 .7rem/1.3 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-top:0}
-tbody th{font-weight:500;color:var(--muted);width:22%}
 
 /* katalog */
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
 .filters button{--c:var(--ink);font:500 .82rem/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:transparent;border:1px solid var(--line);padding:.75em .9em;cursor:pointer;border-radius:2px}
 .filters button:hover{color:var(--ink);border-color:var(--muted)}
 .filters button[aria-pressed="true"]{color:#050b1c;background:var(--c);border-color:var(--c)}
-.filters button span{opacity:.7;margin-left:.4em}
+.filters button .n{opacity:.7;margin-left:.4em}
 .legend{display:flex;flex-wrap:wrap;gap:6px 22px;margin:0 0 22px;padding:0;list-style:none;color:var(--muted);font-size:.9rem}
 .st{display:inline-flex;align-items:center;gap:.5em;font:500 .7rem/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
 .st::before{content:"";width:9px;height:9px;border-radius:50%;border:1.5px solid var(--ink);flex:none}
@@ -207,32 +202,44 @@ form{background:var(--panel);border:1px solid var(--line);padding:clamp(18px,3vw
 label{display:grid;gap:6px;font:500 .72rem/1.3 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 input,select,textarea{font:400 1rem/1.4 var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);padding:.7em .8em;border-radius:2px;width:100%;letter-spacing:0;text-transform:none}
 textarea{resize:vertical;min-height:84px}
-#f-out{min-height:150px;color:var(--muted);background:var(--panel-2)}
 .form-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-#f-status{font:400 .8rem/1.3 var(--f-mono);color:var(--signal);min-height:1.3em}
+#f-status{font:400 .8rem/1.4 var(--f-mono);color:var(--signal);min-height:1.4em}
+#f-status.err{color:#ff9d8c}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+button[disabled]{opacity:.6;cursor:progress}
 .hint{font-size:.88rem;color:var(--muted);line-height:1.45}
 
 footer.site{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--muted);font-size:.9rem}
 footer.site .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;align-items:center}
 footer.site img{display:block;width:min(240px,60vw);height:auto}
 footer.site p{line-height:1.5}
+
+/* pemilih bahasa */
+.lang{display:flex;flex:none;border:1px solid var(--line);border-radius:2px}
+.lang button{font:500 .74rem/1 var(--f-mono);letter-spacing:.08em;padding:.62em .7em;background:transparent;border:0;color:var(--muted);cursor:pointer}
+.lang button:hover{color:var(--ink)}
+.lang button[aria-pressed="true"]{background:var(--panel-2);color:var(--ink)}
 </style>
 </head>
 <body>
 
-<div class="beta"><div class="wrap"><b>VERSI BETA</b> · untuk semakan. Laman rasmi semasa kekal di msims.tech sehingga versi ini diluluskan.</div></div>
+<div class="beta"><div class="wrap" data-i="t3"><b>BETA VERSION</b> · for review. The official site stays at msims.tech until this version is approved.</div></div>
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#atas" aria-label="MSIMS, ke atas laman"><img src="assets/msims-logo-gelap.svg" alt="MSIMS" width="162" height="48"></a>
-    <nav aria-label="Navigasi utama">
-      <a href="#sektor">Sektor</a>
-      <a href="#platform">Platform</a>
-      <a href="#produk">Simulator</a>
-      <a href="#khidmat">Perkhidmatan</a>
-      <a href="#klien">Klien</a>
+    <a class="brand" href="#atas" aria-label="MSIMS, back to top"><img src="assets/msims-logo-gelap.svg" alt="MSIMS" width="162" height="48"></a>
+    <nav aria-label="Main">
+      <a href="#sektor" data-i="t4">Sectors</a>
+      <a href="#platform" data-i="t5">Platform</a>
+      <a href="#produk" data-i="t6">Simulators</a>
+      <a href="#khidmat" data-i="t7">Services</a>
+      <a href="#klien" data-i="t8">Clients</a>
     </nav>
-    <a class="btn small" href="#hubungi">Minta demo</a>
+    <div class="lang" role="group" aria-label="Language / Bahasa">
+      <button type="button" data-lang="en" aria-pressed="true" title="English">EN</button>
+      <button type="button" data-lang="ms" aria-pressed="false" title="Bahasa Melayu">BM</button>
+    </div>
+    <a class="btn small" href="#hubungi" data-i="t9">Request a demo</a>
   </div>
 </header>
 
@@ -242,44 +249,44 @@ footer.site p{line-height:1.5}
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <p class="eyebrow">Pembangun sistem simulator · Batu Caves, Selangor</p>
-        <h1>Simulator latihan buatan Malaysia untuk <em>ladang, laut dan tapak bina.</em></h1>
-        <p class="lede">MSIMS mereka bentuk dan membina sistem simulator dan VR secara menyeluruh: perisian, perkakasan kawalan dan Motion Base. Pelatih belajar mengendali jentuai padi, bot nelayan, traktor sawit, bot peronda, jengkaut dan pacuan empat roda dalam persekitaran Malaysia, tanpa risiko kepada orang atau jentera.</p>
+        <p class="eyebrow" data-i="t10">Simulator system developer · Batu Caves, Selangor</p>
+        <h1 data-i="t11">Malaysian-built training simulators for <em>farm, sea and construction site.</em></h1>
+        <p class="lede" data-i="t12">MSIMS designs and builds complete simulator and VR systems: software, control hardware and Motion Base. Trainees learn to operate combine harvesters, fishing vessels, oil palm tractors, patrol boats, excavators and four-wheel drives in Malaysian environments, with no risk to people or machinery.</p>
         <div class="cta">
-          <a class="btn" href="#hubungi">Minta demo</a>
-          <a class="btn ghost" href="#produk">Lihat semua simulator</a>
+          <a class="btn" href="#hubungi" data-i="t13">Request a demo</a>
+          <a class="btn ghost" href="#produk" data-i="t14">See all simulators</a>
         </div>
       </div>
 
-      <div class="console" id="console" aria-label="Konsol simulasi, animasi ilustrasi">
-        <div class="console-top"><span class="lamp"></span><span>Konsol simulasi</span><span class="note">animasi ilustrasi</span></div>
-        <div class="tabs" role="tablist" aria-label="Pilih senario">
-          <button role="tab" aria-selected="true" data-k="padi">Padi</button>
-          <button role="tab" aria-selected="false" data-k="ikan">Perikanan</button>
-          <button role="tab" aria-selected="false" data-k="sawit">Sawit</button>
-          <button role="tab" aria-selected="false" data-k="maritim">Maritim</button>
-          <button role="tab" aria-selected="false" data-k="bina">Binaan</button>
-          <button role="tab" aria-selected="false" data-k="lasak">Lasak</button>
+      <div class="console" id="console">
+        <div class="console-top"><span class="lamp"></span><span data-i="t15">Simulation console</span><span class="note" data-i="t16">illustrative animation</span></div>
+        <div class="tabs" role="tablist" aria-label="Scenario">
+          <button role="tab" aria-selected="true" data-k="padi" data-i="t17">Paddy</button>
+          <button role="tab" aria-selected="false" data-k="ikan" data-i="t18">Fisheries</button>
+          <button role="tab" aria-selected="false" data-k="sawit" data-i="t19">Oil palm</button>
+          <button role="tab" aria-selected="false" data-k="maritim" data-i="t20">Maritime</button>
+          <button role="tab" aria-selected="false" data-k="bina" data-i="t21">Construction</button>
+          <button role="tab" aria-selected="false" data-k="lasak" data-i="t22">Off-road</button>
         </div>
         <div class="view">
-          <canvas id="sim" role="img" aria-label="Rupa bumi berjaring yang bergerak mengikut senario dipilih"></canvas>
-          <div class="hud l">Senario<b id="hud-scn">Sawah padi</b></div>
-          <div class="hud r">Simulator<b id="hud-prod">Jentuai Padi</b></div>
+          <canvas id="sim" role="img" aria-label="Wireframe terrain moving with the selected scenario"></canvas>
+          <div class="hud l"><span data-i="t23">Scenario</span><b id="hud-scn">Paddy field</b></div>
+          <div class="hud r"><span data-i="t24">Simulator</span><b id="hud-prod">Combine Harvester</b></div>
         </div>
-        <dl class="readouts" aria-label="Bacaan Motion Base">
+        <dl class="readouts" aria-label="Motion Base">
           <div><dt>Pitch</dt><dd><span id="r-pitch">0.0</span><small>°</small></dd></div>
           <div><dt>Roll</dt><dd><span id="r-roll">0.0</span><small>°</small></dd></div>
           <div><dt>Heave</dt><dd><span id="r-heave">0</span><small>cm</small></dd></div>
-          <div><dt>Laju</dt><dd><span id="r-laju">8</span><small id="r-unit">km/j</small></dd></div>
+          <div><dt data-i="t25">Speed</dt><dd><span id="r-laju">8</span><small id="r-unit">km/h</small></dd></div>
         </dl>
       </div>
     </div>
 
     <dl class="facts-strip">
-      <div><dt>6</dt><dd>sektor: pertanian, perikanan, sawit, maritim, binaan, pandu lasak</dd></div>
-      <div><dt id="n-prod">17</dt><dd>simulator dan modul VR dalam katalog</dd></div>
-      <div><dt>2</dt><dd>enjin: Web luar talian dan Unreal Engine 5</dd></div>
-      <div><dt>BM</dt><dd>antara muka, arahan dan laporan dalam Bahasa Melayu</dd></div>
+      <div><dt>6</dt><dd data-i="t26">sectors: agriculture, fisheries, oil palm, maritime, construction, off-road driving</dd></div>
+      <div><dt>17</dt><dd data-i="t27">simulators and VR modules in the catalogue</dd></div>
+      <div><dt>12</dt><dd data-i="t28">agencies and institutions as clients</dd></div>
+      <div><dt>BM</dt><dd data-i="t29">interface, instructions and reports in Bahasa Melayu</dd></div>
     </dl>
   </div>
 </div>
@@ -289,46 +296,46 @@ footer.site p{line-height:1.5}
 <section id="sektor">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Sektor</p>
-      <h2>Enam sektor, satu pembangun.</h2>
-      <p class="sub">Setiap simulator dibina mengikut jentera, perairan dan prosedur kerja di Malaysia, bukan diubah suai daripada perisian luar negara.</p>
+      <p class="eyebrow" data-i="t30">Sectors</p>
+      <h2 data-i="t31">Six sectors, one developer.</h2>
+      <p class="sub" data-i="t32">Every simulator is built around the machinery, waters and working procedures found in Malaysia, not adapted from foreign software.</p>
     </div>
 
     <div class="srow" data-s="padi">
-      <h3>Pertanian</h3>
-      <p class="who"><span class="lbl">Dibina untuk keperluan</span>Kementerian Pertanian dan Keterjaminan Makanan (KPKM), kolej dan institut pertanian, pertubuhan peladang</p>
-      <p class="what"><span class="lbl">Simulator</span>Jentuai Padi · SIM-TANI 3-dalam-1 · Dron Pertanian · VR MyGAP · VR Ladang Durian &amp; Strawberi</p>
-      <button class="btn ghost small" data-go="padi">Lihat 5 simulator</button>
+      <h3 data-i="t33">Agriculture</h3>
+      <p class="who" data-i="t34"><span class="lbl">Built for the needs of</span>Ministry of Agriculture and Food Security (KPKM), agricultural colleges and institutes, farmers' organisations</p>
+      <p class="what" data-i="t35"><span class="lbl">Simulators</span>Paddy Combine Harvester · SIM-TANI 3-in-1 · Agricultural Drone · VR MyGAP · VR Durian &amp; Strawberry Farm</p>
+      <button class="btn ghost small" data-go="padi" data-i="t36">View 5 simulators</button>
     </div>
     <div class="srow" data-s="ikan">
-      <h3>Perikanan</h3>
-      <p class="who"><span class="lbl">Dibina untuk keperluan</span>Jabatan Perikanan, Lembaga Kemajuan Ikan Malaysia (LKIM), kolej perikanan, persatuan nelayan</p>
-      <p class="what"><span class="lbl">Simulator</span>Bot Perikanan · VR Krew Pukat Jerut · VR Krew Pukat Tunda · VR Sayangi Laut Kita</p>
-      <button class="btn ghost small" data-go="ikan">Lihat 4 simulator</button>
+      <h3 data-i="t37">Fisheries</h3>
+      <p class="who" data-i="t38"><span class="lbl">Built for the needs of</span>Department of Fisheries, Fisheries Development Authority of Malaysia (LKIM), fisheries colleges, fishermen's associations</p>
+      <p class="what" data-i="t39"><span class="lbl">Simulators</span>Fishing Vessel · VR Purse Seine Crew · VR Trawl Crew · VR Sayangi Laut Kita</p>
+      <button class="btn ghost small" data-go="ikan" data-i="t40">View 4 simulators</button>
     </div>
     <div class="srow" data-s="sawit">
-      <h3>Sawit &amp; komoditi</h3>
-      <p class="who"><span class="lbl">Dibina untuk keperluan</span>Kementerian Perladangan dan Komoditi (KPK), pusat latihan sawit, pengurusan ladang</p>
-      <p class="what"><span class="lbl">Simulator</span>SIM-SAWIT Angkut: traktor mini dan treler buah tandan segar</p>
-      <button class="btn ghost small" data-go="sawit">Lihat 1 simulator</button>
+      <h3 data-i="t41">Oil palm &amp; commodities</h3>
+      <p class="who" data-i="t42"><span class="lbl">Built for the needs of</span>Ministry of Plantation and Commodities (KPK), oil palm training centres, estate management</p>
+      <p class="what" data-i="t43"><span class="lbl">Simulators</span>SIM-SAWIT Haulage: mini tractor and fresh fruit bunch trailer</p>
+      <button class="btn ghost small" data-go="sawit" data-i="t44">View 1 simulator</button>
     </div>
     <div class="srow" data-s="maritim">
-      <h3>Maritim &amp; pelabuhan</h3>
-      <p class="who"><span class="lbl">Dibina untuk keperluan</span>Agensi Penguatkuasaan Maritim Malaysia (APMM), akademi maritim, pengendali pelabuhan</p>
-      <p class="what"><span class="lbl">Simulator</span>Misi Bot Peronda · NAKHODA Simulator Kapal · Kren STS</p>
-      <button class="btn ghost small" data-go="maritim">Lihat 3 simulator</button>
+      <h3 data-i="t45">Maritime &amp; ports</h3>
+      <p class="who" data-i="t46"><span class="lbl">Built for the needs of</span>Malaysian Maritime Enforcement Agency (APMM), maritime academies, port operators</p>
+      <p class="what" data-i="t47"><span class="lbl">Simulators</span>Patrol Boat Missions · NAKHODA Ship Simulator · STS Crane</p>
+      <button class="btn ghost small" data-go="maritim" data-i="t48">View 3 simulators</button>
     </div>
     <div class="srow" data-s="bina">
-      <h3>Binaan</h3>
-      <p class="who"><span class="lbl">Dibina untuk keperluan</span>Pusat latihan industri pembinaan, kontraktor, institusi TVET</p>
-      <p class="what"><span class="lbl">Simulator</span>Ekskavator · Jengkaut-Pengaut (backhoe) · Forklif</p>
-      <button class="btn ghost small" data-go="bina">Lihat 3 simulator</button>
+      <h3 data-i="t49">Construction</h3>
+      <p class="who" data-i="t50"><span class="lbl">Built for the needs of</span>Construction industry training centres, contractors, TVET institutions</p>
+      <p class="what" data-i="t51"><span class="lbl">Simulators</span>Excavator · Backhoe Loader · Forklift</p>
+      <button class="btn ghost small" data-go="bina" data-i="t52">View 3 simulators</button>
     </div>
     <div class="srow" data-s="lasak">
-      <h3>Pandu lasak</h3>
-      <p class="who"><span class="lbl">Dibina untuk keperluan</span>Latihan pemanduan pacuan empat roda untuk agensi, syarikat ladang dan orang awam</p>
-      <p class="what"><span class="lbl">Simulator</span>Sim Pandu Lasak 4WD: jalan kampung, ladang getah dan sawit</p>
-      <button class="btn ghost small" data-go="lasak">Lihat 1 simulator</button>
+      <h3 data-i="t53">Off-road driving</h3>
+      <p class="who" data-i="t54"><span class="lbl">Built for the needs of</span>Four-wheel-drive driver training for agencies, plantation companies and the public</p>
+      <p class="what" data-i="t55"><span class="lbl">Simulators</span>4WD Off-Road Driving Simulator: village roads, rubber and oil palm estates</p>
+      <button class="btn ghost small" data-go="lasak" data-i="t56">View 1 simulator</button>
     </div>
   </div>
 </section>
@@ -336,197 +343,185 @@ footer.site p{line-height:1.5}
 <section id="platform" class="plat-bg">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Platform</p>
-      <h2>Dari kod hingga kerusi yang bergerak.</h2>
-      <p class="sub">Perisian dan perkakasan dibangunkan di bawah satu bumbung. Hasilnya, setiap simulator MSIMS berkongsi piawaian kawalan, pemarkahan dan penyelenggaraan yang sama.</p>
+      <p class="eyebrow" data-i="t57">Platform</p>
+      <h2 data-i="t58">From code to a seat that moves.</h2>
+      <p class="sub" data-i="t59">Software and hardware are developed under one roof. As a result, every MSIMS simulator shares the same standards for controls, scoring and maintenance.</p>
     </div>
 
     <dl class="specs">
-      <div><dt>4<small>DOF</small></dt><dd>Motion Base yang bergerak mengikut permukaan tanah dan ombak dalam simulasi</dd></div>
-      <div><dt>60<small>Hz</small></dt><dd>Telemetri gerakan dari perisian ke pelantar</dd></div>
-      <div><dt>100</dt><dd>Mata rubrik pemarkahan bagi setiap sesi latihan</dd></div>
-      <div><dt>0</dt><dd>Sambungan internet diperlukan semasa latihan</dd></div>
+      <div><dt>4<small>DOF</small></dt><dd data-i="t60">Motion Base that follows the ground surface and waves in the simulation</dd></div>
+      <div><dt>60<small>Hz</small></dt><dd data-i="t61">Motion telemetry from software to platform</dd></div>
+      <div><dt>100</dt><dd data-i="t62">Points in the scoring rubric for every training session</dd></div>
+      <div><dt>0</dt><dd data-i="t63">Internet connections needed during training</dd></div>
     </dl>
 
     <dl class="caps">
-      <div><dt>Perkakasan kawalan sebenar</dt><dd>Stereng force-feedback, tuil joystick berkembar corak ISO dan SAE, konsol kapal, tuil pecutan dan alat kawalan jauh dron.</dd></div>
-      <div><dt>Konsol jurulatih di tablet</dt><dd>Jurulatih melancarkan senario, menukar cuaca dan angin, serta memantau pelatih dari tablet.</dd></div>
-      <div><dt>Pemarkahan dan transkrip</dt><dd>Rekod nama dan ID pelatih, laporan sesi dan transkrip kompetensi yang boleh dicetak.</dd></div>
-      <div><dt>Luar talian dan berlesen</dt><dd>Berjalan tanpa internet di makmal, kolej atau tapak pameran. Lesen dikunci pada peranti.</dd></div>
-      <div><dt>Modul VR</dt><dd>Pengalaman VR untuk set kepala Meta Quest 3, sesuai untuk pameran dan pembelajaran awam.</dd></div>
-      <div><dt>Persekitaran Malaysia</dt><dd>Sawah, ladang sawit dan getah, perairan Langkawi, tapak bina dan jalan kampung dimodelkan mengikut rupa tempatan.</dd></div>
+      <div><dt data-i="t64">Real control hardware</dt><dd data-i="t65">Force-feedback steering wheels, dual joystick levers in ISO and SAE patterns, ship consoles, throttle levers and drone remote controllers.</dd></div>
+      <div><dt data-i="t66">Instructor console on a tablet</dt><dd data-i="t67">Instructors launch scenarios, change weather and wind, and monitor trainees from a tablet.</dd></div>
+      <div><dt data-i="t68">Scoring and transcripts</dt><dd data-i="t69">Trainee name and ID records, session reports and printable competency transcripts.</dd></div>
+      <div><dt data-i="t70">Offline and licensed</dt><dd data-i="t71">Runs without internet in labs, colleges or exhibition halls. Licences are locked to the device.</dd></div>
+      <div><dt data-i="t72">VR modules</dt><dd data-i="t73">VR experiences for Meta Quest 3 headsets, suited to exhibitions and public learning.</dd></div>
+      <div><dt data-i="t74">Malaysian environments</dt><dd data-i="t75">Paddy fields, oil palm and rubber estates, Langkawi waters, construction sites and village roads, modelled on how they look locally.</dd></div>
     </dl>
-
-    <div class="tbl">
-      <table>
-        <caption>Dua enjin, mengikut tempat latihan</caption>
-        <thead><tr><th></th><th>Versi Web</th><th>Unreal Engine 5</th></tr></thead>
-        <tbody>
-          <tr><th>Pemasangan</th><td>Satu fail, dibuka pada pelayar, tanpa internet</td><td>Aplikasi Windows pada PC grafik</td></tr>
-          <tr><th>Grafik</th><td>3D masa nyata dengan mod AAA dan Ringan</td><td>Ray tracing dan DLSS, boleh dilaras mengikut GPU</td></tr>
-          <tr><th>Sesuai untuk</th><td>Makmal komputer, kiosk pameran, kelas besar</td><td>Rig simulator penuh dengan Motion Base dan panel instrumen</td></tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </section>
 
 <section id="produk">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Katalog</p>
-      <h2>Simulator dan modul VR.</h2>
-      <p class="sub">Tapis mengikut sektor. Status setiap produk ditunjukkan dengan jujur: ada yang sedia dibekal, ada yang boleh didemo, ada yang masih dibangunkan.</p>
+      <p class="eyebrow" data-i="t76">Catalogue</p>
+      <h2 data-i="t77">Simulators and VR modules.</h2>
+      <p class="sub" data-i="t78">Filter by sector. Each product's status is shown plainly: some are ready to supply, some can be demonstrated, some are still in development.</p>
     </div>
 
-    <div class="filters" role="group" aria-label="Tapis mengikut sektor">
-      <button aria-pressed="true" data-f="semua">Semua</button>
-      <button aria-pressed="false" data-f="padi" data-s="padi">Pertanian</button>
-      <button aria-pressed="false" data-f="ikan" data-s="ikan">Perikanan</button>
-      <button aria-pressed="false" data-f="sawit" data-s="sawit">Sawit</button>
-      <button aria-pressed="false" data-f="maritim" data-s="maritim">Maritim</button>
-      <button aria-pressed="false" data-f="bina" data-s="bina">Binaan</button>
-      <button aria-pressed="false" data-f="lasak" data-s="lasak">Pandu lasak</button>
+    <div class="filters" role="group" aria-label="Sector filter">
+      <button aria-pressed="true" data-f="semua"><span data-i="t79">All</span><span class="n">17</span></button>
+      <button aria-pressed="false" data-f="padi" data-s="padi"><span data-i="t80">Agriculture</span><span class="n">5</span></button>
+      <button aria-pressed="false" data-f="ikan" data-s="ikan"><span data-i="t81">Fisheries</span><span class="n">4</span></button>
+      <button aria-pressed="false" data-f="sawit" data-s="sawit"><span data-i="t82">Oil palm</span><span class="n">1</span></button>
+      <button aria-pressed="false" data-f="maritim" data-s="maritim"><span data-i="t83">Maritime</span><span class="n">3</span></button>
+      <button aria-pressed="false" data-f="bina" data-s="bina"><span data-i="t84">Construction</span><span class="n">3</span></button>
+      <button aria-pressed="false" data-f="lasak" data-s="lasak"><span data-i="t85">Off-road</span><span class="n">1</span></button>
     </div>
-    <ul class="legend" aria-label="Petunjuk status">
-      <li><span class="st st-sedia">Sedia dibekal</span></li>
-      <li><span class="st st-demo">Demo tersedia</span></li>
-      <li><span class="st st-bina">Dalam pembangunan</span></li>
+    <ul class="legend">
+      <li><span class="st st-sedia" data-i="t86">Ready to supply</span></li>
+      <li><span class="st st-demo" data-i="t87">Demo available</span></li>
+      <li><span class="st st-bina" data-i="t88">In development</span></li>
     </ul>
 
     <div class="prods" id="prods">
 
       <article class="prod" data-s="padi">
-        <header><span class="tag">Simulator</span><span class="st st-sedia">Sedia dibekal</span></header>
-        <h3>Simulator Jentuai Padi</h3>
-        <p>Menuai, menanam dan membajak di sawah dengan jentuai, jentanam padi dan traktor bajak piring. Panel instrumen dan tablet kawalan bertukar mengikut jentera yang dipilih.</p>
-        <ul><li>Pilihan jentera dan cuaca</li><li>Stereng force-feedback mengikut permukaan tanah</li></ul>
-        <footer>Unreal Engine 5 · Motion Base</footer>
+        <header><span class="tag" data-i="t89">Simulator</span><span class="st st-sedia" data-i="t90">Ready to supply</span></header>
+        <h3 data-i="t91">Paddy Combine Harvester Simulator</h3>
+        <p data-i="t92">Harvest, transplant and plough in the paddy field with a combine harvester, rice transplanter and disc-plough tractor. The instrument panel and control tablet change with the selected machine.</p>
+        <ul><li data-i="t93">Choice of machine and weather</li><li data-i="t94">Force-feedback steering that follows the ground surface</li></ul>
+        <footer data-i="t95">Motion Base · Instrument panel</footer>
       </article>
 
       <article class="prod" data-s="padi">
-        <header><span class="tag">Simulator</span><span class="st st-demo">Demo tersedia</span></header>
-        <h3>SIM-TANI 3-dalam-1</h3>
-        <p>Tiga jentera dalam satu perisian: jentuai, jentanam padi dan traktor rotovator. Liputan kawasan kerja dijejak petak demi petak.</p>
-        <ul><li>Pemarkahan lima kriteria</li><li>Rupa bumi berbeza bagi setiap jentera</li></ul>
-        <footer>Web · luar talian · Motion Base</footer>
+        <header><span class="tag" data-i="t96">Simulator</span><span class="st st-demo" data-i="t97">Demo available</span></header>
+        <h3 data-i="t98">SIM-TANI 3-in-1</h3>
+        <p data-i="t99">Three machines in one program: combine harvester, rice transplanter and rotovator tractor. Work-area coverage is tracked plot by plot.</p>
+        <ul><li data-i="t100">Five-criteria scoring</li><li data-i="t101">Different terrain for each machine</li></ul>
+        <footer data-i="t102">Offline · Motion Base</footer>
       </article>
 
       <article class="prod" data-s="padi">
-        <header><span class="tag">Simulator</span><span class="st st-sedia">Sedia dibekal</span></header>
-        <h3>Simulator Dron Pertanian</h3>
-        <p>Dari pengenalan peralatan dan asas kawalan hingga semburan baja dan racun di sawah padi, ladang mangga Harumanis dan ladang jagung.</p>
-        <ul><li>9 modul, rubrik 100 mata</li><li>Rekod pelatih dan cetakan PDF</li><li>Alat kawalan jauh sebenar melalui USB</li></ul>
-        <footer>Web · Unreal Engine 5</footer>
+        <header><span class="tag" data-i="t103">Simulator</span><span class="st st-sedia" data-i="t104">Ready to supply</span></header>
+        <h3 data-i="t105">Agricultural Drone Simulator</h3>
+        <p data-i="t106">From equipment introduction and basic controls to spraying fertiliser and pesticide over paddy fields, Harumanis mango orchards and corn fields.</p>
+        <ul><li data-i="t107">9 modules, 100-point rubric</li><li data-i="t108">Trainee records and PDF printouts</li><li data-i="t109">Real remote controller over USB</li></ul>
+        <footer data-i="t110">Offline</footer>
       </article>
 
       <article class="prod" data-s="padi">
-        <header><span class="tag">Modul VR</span><span class="st st-sedia">Sedia dibekal</span></header>
-        <h3>VR MyGAP</h3>
-        <p>Amalan baik pensijilan MyGAP diterokai langkah demi langkah di ladang maya.</p>
-        <footer>VR</footer>
+        <header><span class="tag" data-i="t111">VR module</span><span class="st st-sedia" data-i="t112">Ready to supply</span></header>
+        <h3 data-i="t113">VR MyGAP</h3>
+        <p data-i="t114">MyGAP certification good practices explored step by step on a virtual farm.</p>
+        <footer data-i="t115">VR</footer>
       </article>
 
       <article class="prod" data-s="padi">
-        <header><span class="tag">Modul VR</span><span class="st st-sedia">Sedia dibekal</span></header>
-        <h3>VR Ladang Durian &amp; Strawberi</h3>
-        <p>Lawatan ladang durian dan strawberi secara maya untuk pameran dan pembelajaran.</p>
-        <footer>VR</footer>
+        <header><span class="tag" data-i="t116">VR module</span><span class="st st-sedia" data-i="t117">Ready to supply</span></header>
+        <h3 data-i="t118">VR Durian &amp; Strawberry Farm</h3>
+        <p data-i="t119">A virtual visit to durian and strawberry farms for exhibitions and learning.</p>
+        <footer data-i="t120">VR</footer>
       </article>
 
       <article class="prod" data-s="ikan">
-        <header><span class="tag">Simulator</span><span class="st st-sedia">Sedia dibekal</span></header>
-        <h3>Simulator Bot Perikanan</h3>
-        <p>Operasi pukat jerut dan pukat tunda dengan fizik bot enam darjah kebebasan, cuaca buruk dan pelayaran malam.</p>
-        <ul><li>9 modul latihan</li><li>Beban tangkapan, suhu enjin dan penggunaan bahan api</li></ul>
-        <footer>Web · luar talian · Motion Base</footer>
+        <header><span class="tag" data-i="t121">Simulator</span><span class="st st-sedia" data-i="t122">Ready to supply</span></header>
+        <h3 data-i="t123">Fishing Vessel Simulator</h3>
+        <p data-i="t124">Purse seine and trawl operations with six-degree-of-freedom vessel physics, rough weather and night sailing.</p>
+        <ul><li data-i="t125">9 training modules</li><li data-i="t126">Catch load, engine temperature and fuel consumption</li></ul>
+        <footer data-i="t127">Offline · Motion Base</footer>
       </article>
 
       <article class="prod" data-s="ikan">
-        <header><span class="tag">Modul VR</span><span class="st st-demo">Demo tersedia</span></header>
-        <h3>VR Krew Pukat Jerut</h3>
-        <p>Pemain menjadi krew bot nelayan: menurunkan unjam, melabuh pukat dan menaikkan hasil tangkapan dengan kawalan tangan.</p>
-        <ul><li>Direka untuk kanak-kanak dan orang awam</li></ul>
-        <footer>Meta Quest 3</footer>
+        <header><span class="tag" data-i="t128">VR module</span><span class="st st-demo" data-i="t129">Demo available</span></header>
+        <h3 data-i="t130">VR Purse Seine Crew</h3>
+        <p data-i="t131">Players become the crew of a fishing vessel: lowering the fish aggregating device, setting the net and hauling in the catch with hand controllers.</p>
+        <ul><li data-i="t132">Designed for children and the public</li></ul>
+        <footer data-i="t133">Meta Quest 3</footer>
       </article>
 
       <article class="prod" data-s="ikan">
-        <header><span class="tag">Modul VR</span><span class="st st-sedia">Sedia dibekal</span></header>
-        <h3>VR Krew Pukat Tunda</h3>
-        <p>Modul ekspo yang membawa pengunjung ke geladak bot pukat tunda, lengkap dengan kawalan winch.</p>
-        <footer>VR</footer>
+        <header><span class="tag" data-i="t134">VR module</span><span class="st st-sedia" data-i="t135">Ready to supply</span></header>
+        <h3 data-i="t136">VR Trawl Crew</h3>
+        <p data-i="t137">An expo module that puts visitors on the deck of a trawler, complete with winch controls.</p>
+        <footer data-i="t138">VR</footer>
       </article>
 
       <article class="prod" data-s="ikan">
-        <header><span class="tag">Modul VR</span><span class="st st-sedia">Sedia dibekal</span></header>
-        <h3>VR Sayangi Laut Kita</h3>
-        <p>Menyelam di taman laut Malaysia sebagai penyelam konservasi: mengutip sampah dan membiak karang dalam had masa.</p>
-        <ul><li>Pilihan tapak selaman</li><li>Had masa dan markah boleh dilaras</li><li>Video 360 dasar laut</li></ul>
-        <footer>Meta Quest 3</footer>
+        <header><span class="tag" data-i="t139">VR module</span><span class="st st-sedia" data-i="t140">Ready to supply</span></header>
+        <h3 data-i="t141">VR Sayangi Laut Kita</h3>
+        <p data-i="t142">Dive in Malaysia's marine parks as a conservation diver: collecting rubbish and propagating coral against the clock.</p>
+        <ul><li data-i="t143">Choice of dive sites</li><li data-i="t144">Adjustable time limit and target score</li><li data-i="t145">360° seabed video</li></ul>
+        <footer data-i="t146">Meta Quest 3</footer>
       </article>
 
       <article class="prod" data-s="sawit">
-        <header><span class="tag">Simulator</span><span class="st st-demo">Demo tersedia</span></header>
-        <h3>SIM-SAWIT Angkut</h3>
-        <p>Pengangkutan buah tandan segar dengan traktor mini dan treler di ladang sawit. Modul dirangka selari dengan latihan mekanisasi ladang sawit.</p>
-        <ul><li>5 modul berskor, mod cabaran dan mod bebas</li><li>Konsol jurulatih di tablet</li><li>Motion Base mengikut permukaan tanah</li></ul>
-        <footer>Web · Unreal Engine 5 dalam pembangunan</footer>
+        <header><span class="tag" data-i="t147">Simulator</span><span class="st st-demo" data-i="t148">Demo available</span></header>
+        <h3 data-i="t149">SIM-SAWIT Haulage</h3>
+        <p data-i="t150">Hauling fresh fruit bunches with a mini tractor and trailer on an oil palm estate. Modules are structured in line with oil palm mechanisation training.</p>
+        <ul><li data-i="t151">5 scored modules, challenge mode and free mode</li><li data-i="t152">Instructor console on a tablet</li><li data-i="t153">Motion Base follows the ground surface</li></ul>
+        <footer data-i="t154">Offline · Motion Base</footer>
       </article>
 
       <article class="prod" data-s="maritim">
-        <header><span class="tag">Simulator</span><span class="st st-demo">Demo tersedia</span></header>
-        <h3>Simulator Misi Bot Peronda</h3>
-        <p>Enam misi pendek berinspirasikan tugas penguatkuasaan maritim di perairan Malaysia, termasuk rondaan pulau-pulau Langkawi. Sesuai untuk pengunjung pameran.</p>
-        <ul><li>Stereng, tuil pecutan dan pemilih gear</li><li>Mod grafik AAA dan Ringan</li></ul>
-        <footer>Web · Motion Base</footer>
+        <header><span class="tag" data-i="t155">Simulator</span><span class="st st-demo" data-i="t156">Demo available</span></header>
+        <h3 data-i="t157">Patrol Boat Mission Simulator</h3>
+        <p data-i="t158">Six short missions inspired by maritime enforcement duties in Malaysian waters, including patrols around the Langkawi islands. Suited to exhibition visitors.</p>
+        <ul><li data-i="t159">Steering wheel, throttle lever and gear selector</li><li data-i="t160">AAA and Lite graphics modes</li></ul>
+        <footer data-i="t161">Motion Base</footer>
       </article>
 
       <article class="prod" data-s="maritim">
-        <header><span class="tag">Simulator</span><span class="st st-demo">Demo tersedia</span></header>
-        <h3>NAKHODA Simulator Kapal</h3>
-        <p>Pengendalian kapal dengan konsol kawalan kapal, ombak laut masa nyata dan penentukuran kawalan berpandu.</p>
-        <ul><li>Transkrip kompetensi bercetak</li></ul>
-        <footer>Web · luar talian</footer>
+        <header><span class="tag" data-i="t162">Simulator</span><span class="st st-demo" data-i="t163">Demo available</span></header>
+        <h3 data-i="t164">NAKHODA Ship Simulator</h3>
+        <p data-i="t165">Ship handling with a ship control console, real-time sea waves and guided control calibration.</p>
+        <ul><li data-i="t166">Printable competency transcripts</li></ul>
+        <footer data-i="t167">Offline</footer>
       </article>
 
       <article class="prod" data-s="maritim">
-        <header><span class="tag">Simulator</span><span class="st st-sedia">Sedia dibekal</span></header>
-        <h3>Simulator Kren STS</h3>
-        <p>Kren ship-to-shore dengan fizik ayunan kontena, pelan bay berturutan dan cuaca yang mempengaruhi ayunan troli.</p>
-        <ul><li>Rubrik: masa, ayunan, ketepatan, keselamatan</li><li>Mod jurulatih di tablet dengan paparan 3D spreader</li><li>Laporan CSV dan bercetak</li></ul>
-        <footer>Web · Unreal Engine 5</footer>
+        <header><span class="tag" data-i="t168">Simulator</span><span class="st st-sedia" data-i="t169">Ready to supply</span></header>
+        <h3 data-i="t170">STS Crane Simulator</h3>
+        <p data-i="t171">A ship-to-shore crane with container sway physics, sequenced bay plans and weather that affects trolley sway.</p>
+        <ul><li data-i="t172">Rubric: time, sway, accuracy, safety</li><li data-i="t173">Instructor mode on a tablet with a 3D spreader view</li><li data-i="t174">CSV and printed reports</li></ul>
+        <footer data-i="t175">Motion Base</footer>
       </article>
 
       <article class="prod" data-s="bina">
-        <header><span class="tag">Simulator</span><span class="st st-demo">Demo tersedia</span></header>
-        <h3>Simulator Ekskavator</h3>
-        <p>Jengkaut berkaki ulat dari pandangan kabin, dengan dua tuil joystick sebagai konsol kiri dan kanan.</p>
-        <ul><li>Tetapan kawalan boleh diubah dan disimpan</li><li>Pengesanan sentuhan timba dengan tanah</li></ul>
-        <footer>Web</footer>
+        <header><span class="tag" data-i="t176">Simulator</span><span class="st st-demo" data-i="t177">Demo available</span></header>
+        <h3 data-i="t178">Excavator Simulator</h3>
+        <p data-i="t179">A crawler excavator from the cab view, with two joystick levers as the left and right consoles.</p>
+        <ul><li data-i="t180">Control settings can be changed and saved</li><li data-i="t181">Bucket-to-ground contact detection</li></ul>
+        <footer data-i="t182">Dual joystick consoles</footer>
       </article>
 
       <article class="prod" data-s="bina">
-        <header><span class="tag">Simulator</span><span class="st st-demo">Demo tersedia</span></header>
-        <h3>Simulator Jengkaut-Pengaut</h3>
-        <p>Backhoe loader dengan fizik tanah berzarah, ram hidraulik berfungsi dan urutan hidup enjin sebelum kerja bermula.</p>
-        <ul><li>Corak tuil ISO dan SAE</li><li>Amaran perlanggaran lengan</li><li>Skrin pengawal di tablet</li></ul>
-        <footer>Web · Unreal Engine 5 · Motion Base</footer>
+        <header><span class="tag" data-i="t183">Simulator</span><span class="st st-demo" data-i="t184">Demo available</span></header>
+        <h3 data-i="t185">Backhoe Loader Simulator</h3>
+        <p data-i="t186">A backhoe loader with particle soil physics, working hydraulic rams and an engine start-up sequence before work begins.</p>
+        <ul><li data-i="t187">ISO and SAE lever patterns</li><li data-i="t188">Arm collision warnings</li><li data-i="t189">Controller screen on a tablet</li></ul>
+        <footer data-i="t190">Motion Base</footer>
       </article>
 
       <article class="prod" data-s="bina">
-        <header><span class="tag">Simulator</span><span class="st st-demo">Demo tersedia</span></header>
-        <h3>Simulator Forklif</h3>
-        <p>Tujuh modul latihan forklif yang diselaraskan dengan keperluan AKKP 1994, JKKP dan NIOSH.</p>
-        <ul><li>Persekitaran gudang dengan bunyi jentera</li></ul>
-        <footer>Web · luar talian</footer>
+        <header><span class="tag" data-i="t191">Simulator</span><span class="st st-demo" data-i="t192">Demo available</span></header>
+        <h3 data-i="t193">Forklift Simulator</h3>
+        <p data-i="t194">Seven forklift training modules aligned with the requirements of OSHA 1994, DOSH and NIOSH.</p>
+        <ul><li data-i="t195">Warehouse environment with machine sounds</li></ul>
+        <footer data-i="t196">Offline</footer>
       </article>
 
       <article class="prod" data-s="lasak">
-        <header><span class="tag">Simulator</span><span class="st st-bina">Dalam pembangunan</span></header>
-        <h3>Sim Pandu Lasak 4WD</h3>
-        <p>Kira-kira 3 km jalan kampung dan 3 km laluan lasak merentas ladang getah dan sawit, untuk merasai ciri pacuan empat roda.</p>
-        <ul><li>Stereng force-feedback, gear dan brek tangan</li><li>Lopak air dan lumpur</li><li>Peta bandar dirancang</li></ul>
-        <footer>Unreal Engine 5 · Motion Base</footer>
+        <header><span class="tag" data-i="t197">Simulator</span><span class="st st-bina" data-i="t198">In development</span></header>
+        <h3 data-i="t199">4WD Off-Road Driving Simulator</h3>
+        <p data-i="t200">About 3 km of village road and 3 km of off-road trail through rubber and oil palm estates, to experience four-wheel-drive features.</p>
+        <ul><li data-i="t201">Force-feedback steering, gears and handbrake</li><li data-i="t202">Puddles and mud</li><li data-i="t203">City map planned</li></ul>
+        <footer data-i="t204">Motion Base</footer>
       </article>
 
     </div>
@@ -538,13 +533,13 @@ footer.site p{line-height:1.5}
 <section id="khidmat">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Perkhidmatan</p>
-      <h2>Tiga cara bekerjasama.</h2>
+      <p class="eyebrow" data-i="t205">Services</p>
+      <h2 data-i="t206">Three ways to work with us.</h2>
     </div>
     <div class="svc">
-      <div><h3>Jualan sistem</h3><p>Sistem simulator dan VR lengkap: perisian, PC, paparan, kawalan dan Motion Base, dipasang dan diuji di premis anda.</p></div>
-      <div><h3>Sewaan pameran</h3><p>Unit simulator dan VR untuk ekspo, hari terbuka dan program jangkauan, dengan senario pendek yang sesuai untuk orang awam.</p></div>
-      <div><h3>Pembangunan tersuai</h3><p>Simulator atau modul VR baharu mengikut jentera, kurikulum dan prosedur kerja organisasi anda.</p></div>
+      <div><h3 data-i="t207">System sales</h3><p data-i="t208">Complete simulator and VR systems: software, PC, displays, controls and Motion Base, installed and tested at your premises.</p></div>
+      <div><h3 data-i="t209">Exhibition rental</h3><p data-i="t210">Simulator and VR units for expos, open days and outreach programmes, with short scenarios suited to the public.</p></div>
+      <div><h3 data-i="t211">Custom development</h3><p data-i="t212">New simulators or VR modules built around your organisation's machinery, curriculum and working procedures.</p></div>
     </div>
   </div>
 </section>
@@ -552,8 +547,8 @@ footer.site p{line-height:1.5}
 <section id="klien" class="plat-bg">
   <div class="wrap">
     <div class="head">
-      <p class="eyebrow">Klien kami</p>
-      <h2>Dipercayai agensi pertanian dan perikanan negara.</h2>
+      <p class="eyebrow" data-i="t213">Our clients</p>
+      <h2 data-i="t214">Trusted by the nation's agriculture and fisheries agencies.</h2>
     </div>
     <ul class="klien">
       <li>Kolej Pertanian Malaysia</li>
@@ -576,50 +571,61 @@ footer.site p{line-height:1.5}
   <div class="wrap">
     <div class="contact">
       <div>
-        <p class="eyebrow">Hubungi kami</p>
-        <h2 style="margin-top:14px">Minta demo atau sebut harga.</h2>
+        <p class="eyebrow" data-i="t215">Contact us</p>
+        <h2 style="margin-top:14px" data-i="t216">Request a demo or a quotation.</h2>
         <address>
-          <div><span class="lbl">Ibu pejabat</span>MSIMS TECH SERVICES<br>No. 17A, Jalan SG 8/7, Taman Sri Gombak,<br>68100 Batu Caves, Selangor</div>
-          <div><span class="lbl">E-mel</span><a href="mailto:sales@msims.tech">sales@msims.tech</a></div>
-          <div><span class="lbl">Telefon</span><a href="tel:+60172233070">+6017-22 33 070</a></div>
+          <div><span class="lbl" data-i="t217">Headquarters</span>MSIMS TECH SERVICES<br>No. 17A, Jalan SG 8/7, Taman Sri Gombak,<br>68100 Batu Caves, Selangor, Malaysia</div>
+          <div><span class="lbl" data-i="t218">Email</span><a href="mailto:sales@msims.tech">sales@msims.tech</a></div>
+          <div><span class="lbl" data-i="t219">Phone</span><a href="tel:+60172233070">+6017-22 33 070</a></div>
         </address>
       </div>
 
-      <form id="tanya" novalidate>
+      <form id="tanya" method="post" action="send.php" novalidate>
         <div class="row2">
-          <label for="f-org">Organisasi
-            <input id="f-org" type="text" autocomplete="organization" placeholder="cth. Kolej Pertanian">
+          <label for="f-nama"><span data-i="t220">Your name</span>
+            <input id="f-nama" name="name" type="text" autocomplete="name" maxlength="100" required>
           </label>
-          <label for="f-nama">Nama anda
-            <input id="f-nama" type="text" autocomplete="name">
+          <label for="f-org"><span data-i="t221">Organisation</span>
+            <input id="f-org" name="org" type="text" autocomplete="organization" maxlength="140" placeholder="e.g. Agricultural College" data-i-ph="t1">
           </label>
         </div>
         <div class="row2">
-          <label for="f-sektor">Sektor
-            <select id="f-sektor">
-              <option>Pertanian</option><option>Perikanan</option><option>Sawit dan komoditi</option>
-              <option>Maritim dan pelabuhan</option><option>Binaan</option><option>Pandu lasak</option>
+          <label for="f-email"><span data-i="t222">Email</span>
+            <input id="f-email" name="email" type="email" autocomplete="email" maxlength="160" required>
+          </label>
+          <label for="f-tel"><span data-i="t223">Phone (optional)</span>
+            <input id="f-tel" name="phone" type="tel" autocomplete="tel" maxlength="40">
+          </label>
+        </div>
+        <div class="row2">
+          <label for="f-sektor"><span data-i="t224">Sector</span>
+            <select id="f-sektor" name="sector">
+              <option value="Agriculture" data-i="t225">Agriculture</option>
+              <option value="Fisheries" data-i="t226">Fisheries</option>
+              <option value="Oil palm and commodities" data-i="t227">Oil palm and commodities</option>
+              <option value="Maritime and ports" data-i="t228">Maritime and ports</option>
+              <option value="Construction" data-i="t229">Construction</option>
+              <option value="Off-road driving" data-i="t230">Off-road driving</option>
             </select>
           </label>
-          <label for="f-jenis">Jenis pertanyaan
-            <select id="f-jenis">
-              <option>Demo simulator</option><option>Pembelian sistem</option>
-              <option>Sewaan untuk pameran</option><option>Pembangunan perisian tersuai</option>
+          <label for="f-jenis"><span data-i="t231">Enquiry type</span>
+            <select id="f-jenis" name="type">
+              <option value="Simulator demo" data-i="t232">Simulator demo</option>
+              <option value="System purchase" data-i="t233">System purchase</option>
+              <option value="Exhibition rental" data-i="t234">Exhibition rental</option>
+              <option value="Custom software development" data-i="t235">Custom software development</option>
             </select>
           </label>
         </div>
-        <label for="f-nota">Catatan
-          <textarea id="f-nota" placeholder="Jentera, bilangan pelatih, tarikh program dan sebagainya"></textarea>
+        <label for="f-nota"><span data-i="t236">Message</span>
+          <textarea id="f-nota" name="message" maxlength="3000" placeholder="Machinery, number of trainees, programme dates and so on" data-i-ph="t2"></textarea>
         </label>
-        <label for="f-out">Mesej anda
-          <textarea id="f-out" readonly></textarea>
-        </label>
+        <div class="hp" aria-hidden="true"><label for="f-web">Website<input id="f-web" name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
         <div class="form-actions">
-          <button class="btn" type="button" id="f-copy">Salin mesej</button>
-          <a class="btn ghost" id="f-mail" href="mailto:sales@msims.tech">Buka dalam e-mel</a>
+          <button class="btn" type="submit" id="f-send" data-i="t237">Send enquiry</button>
           <span id="f-status" role="status" aria-live="polite"></span>
         </div>
-        <p class="hint">Mesej tidak dihantar secara automatik. Salin dan hantar ke sales@msims.tech, atau tekan Buka dalam e-mel.</p>
+        <p class="hint" data-i="t238">Your enquiry goes straight to the MSIMS team by email. We reply to the address you give.</p>
       </form>
     </div>
   </div>
@@ -630,7 +636,7 @@ footer.site p{line-height:1.5}
 <footer class="site">
   <div class="wrap">
     <img src="assets/msims-logo-gelap.svg" alt="MSIMS, Motion and Simulation System" width="240" height="71">
-    <p>© 2026 MSIMS Tech Services<br>Simulator dan VR buatan Malaysia</p>
+    <p data-i="t239">© 2026 MSIMS Tech Services<br>Simulators and VR built in Malaysia</p>
   </div>
 </footer>
 
@@ -639,6 +645,30 @@ footer.site p{line-height:1.5}
   "use strict";
   var $=function(id){return document.getElementById(id)};
   var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- dwibahasa: Inggeris lalai, Bahasa Melayu pilihan ---------- */
+  var MS={"t1": "cth. Kolej Pertanian", "t2": "Jentera, bilangan pelatih, tarikh program dan sebagainya", "t3": "<b>VERSI BETA<\/b> · untuk semakan. Laman rasmi semasa kekal di msims.tech sehingga versi ini diluluskan.", "t4": "Sektor", "t5": "Platform", "t6": "Simulator", "t7": "Perkhidmatan", "t8": "Klien", "t9": "Minta demo", "t10": "Pembangun sistem simulator · Batu Caves, Selangor", "t11": "Simulator latihan buatan Malaysia untuk <em>ladang, laut dan tapak bina.<\/em>", "t12": "MSIMS mereka bentuk dan membina sistem simulator dan VR secara menyeluruh: perisian, perkakasan kawalan dan Motion Base. Pelatih belajar mengendali jentuai padi, bot nelayan, traktor sawit, bot peronda, jengkaut dan pacuan empat roda dalam persekitaran Malaysia, tanpa risiko kepada orang atau jentera.", "t13": "Minta demo", "t14": "Lihat semua simulator", "t15": "Konsol simulasi", "t16": "animasi ilustrasi", "t17": "Padi", "t18": "Perikanan", "t19": "Sawit", "t20": "Maritim", "t21": "Binaan", "t22": "Lasak", "t23": "Senario", "t24": "Simulator", "t25": "Laju", "t26": "sektor: pertanian, perikanan, sawit, maritim, binaan, pandu lasak", "t27": "simulator dan modul VR dalam katalog", "t28": "agensi dan institusi sebagai klien", "t29": "antara muka, arahan dan laporan dalam Bahasa Melayu", "t30": "Sektor", "t31": "Enam sektor, satu pembangun.", "t32": "Setiap simulator dibina mengikut jentera, perairan dan prosedur kerja di Malaysia, bukan diubah suai daripada perisian luar negara.", "t33": "Pertanian", "t34": "<span class=\"lbl\">Dibina untuk keperluan<\/span>Kementerian Pertanian dan Keterjaminan Makanan (KPKM), kolej dan institut pertanian, pertubuhan peladang", "t35": "<span class=\"lbl\">Simulator<\/span>Jentuai Padi · SIM-TANI 3-dalam-1 · Dron Pertanian · VR MyGAP · VR Ladang Durian &amp; Strawberi", "t36": "Lihat 5 simulator", "t37": "Perikanan", "t38": "<span class=\"lbl\">Dibina untuk keperluan<\/span>Jabatan Perikanan, Lembaga Kemajuan Ikan Malaysia (LKIM), kolej perikanan, persatuan nelayan", "t39": "<span class=\"lbl\">Simulator<\/span>Bot Perikanan · VR Krew Pukat Jerut · VR Krew Pukat Tunda · VR Sayangi Laut Kita", "t40": "Lihat 4 simulator", "t41": "Sawit &amp; komoditi", "t42": "<span class=\"lbl\">Dibina untuk keperluan<\/span>Kementerian Perladangan dan Komoditi (KPK), pusat latihan sawit, pengurusan ladang", "t43": "<span class=\"lbl\">Simulator<\/span>SIM-SAWIT Angkut: traktor mini dan treler buah tandan segar", "t44": "Lihat 1 simulator", "t45": "Maritim &amp; pelabuhan", "t46": "<span class=\"lbl\">Dibina untuk keperluan<\/span>Agensi Penguatkuasaan Maritim Malaysia (APMM), akademi maritim, pengendali pelabuhan", "t47": "<span class=\"lbl\">Simulator<\/span>Misi Bot Peronda · NAKHODA Simulator Kapal · Kren STS", "t48": "Lihat 3 simulator", "t49": "Binaan", "t50": "<span class=\"lbl\">Dibina untuk keperluan<\/span>Pusat latihan industri pembinaan, kontraktor, institusi TVET", "t51": "<span class=\"lbl\">Simulator<\/span>Ekskavator · Jengkaut-Pengaut (backhoe) · Forklif", "t52": "Lihat 3 simulator", "t53": "Pandu lasak", "t54": "<span class=\"lbl\">Dibina untuk keperluan<\/span>Latihan pemanduan pacuan empat roda untuk agensi, syarikat ladang dan orang awam", "t55": "<span class=\"lbl\">Simulator<\/span>Sim Pandu Lasak 4WD: jalan kampung, ladang getah dan sawit", "t56": "Lihat 1 simulator", "t57": "Platform", "t58": "Dari kod hingga kerusi yang bergerak.", "t59": "Perisian dan perkakasan dibangunkan di bawah satu bumbung. Hasilnya, setiap simulator MSIMS berkongsi piawaian kawalan, pemarkahan dan penyelenggaraan yang sama.", "t60": "Motion Base yang bergerak mengikut permukaan tanah dan ombak dalam simulasi", "t61": "Telemetri gerakan dari perisian ke pelantar", "t62": "Mata rubrik pemarkahan bagi setiap sesi latihan", "t63": "Sambungan internet diperlukan semasa latihan", "t64": "Perkakasan kawalan sebenar", "t65": "Stereng force-feedback, tuil joystick berkembar corak ISO dan SAE, konsol kapal, tuil pecutan dan alat kawalan jauh dron.", "t66": "Konsol jurulatih di tablet", "t67": "Jurulatih melancarkan senario, menukar cuaca dan angin, serta memantau pelatih dari tablet.", "t68": "Pemarkahan dan transkrip", "t69": "Rekod nama dan ID pelatih, laporan sesi dan transkrip kompetensi yang boleh dicetak.", "t70": "Luar talian dan berlesen", "t71": "Berjalan tanpa internet di makmal, kolej atau tapak pameran. Lesen dikunci pada peranti.", "t72": "Modul VR", "t73": "Pengalaman VR untuk set kepala Meta Quest 3, sesuai untuk pameran dan pembelajaran awam.", "t74": "Persekitaran Malaysia", "t75": "Sawah, ladang sawit dan getah, perairan Langkawi, tapak bina dan jalan kampung dimodelkan mengikut rupa tempatan.", "t76": "Katalog", "t77": "Simulator dan modul VR.", "t78": "Tapis mengikut sektor. Status setiap produk ditunjukkan dengan jujur: ada yang sedia dibekal, ada yang boleh didemo, ada yang masih dibangunkan.", "t79": "Semua", "t80": "Pertanian", "t81": "Perikanan", "t82": "Sawit", "t83": "Maritim", "t84": "Binaan", "t85": "Pandu lasak", "t86": "Sedia dibekal", "t87": "Demo tersedia", "t88": "Dalam pembangunan", "t89": "Simulator", "t90": "Sedia dibekal", "t91": "Simulator Jentuai Padi", "t92": "Menuai, menanam dan membajak di sawah dengan jentuai, jentanam padi dan traktor bajak piring. Panel instrumen dan tablet kawalan bertukar mengikut jentera yang dipilih.", "t93": "Pilihan jentera dan cuaca", "t94": "Stereng force-feedback mengikut permukaan tanah", "t95": "Motion Base · Panel instrumen", "t96": "Simulator", "t97": "Demo tersedia", "t98": "SIM-TANI 3-dalam-1", "t99": "Tiga jentera dalam satu perisian: jentuai, jentanam padi dan traktor rotovator. Liputan kawasan kerja dijejak petak demi petak.", "t100": "Pemarkahan lima kriteria", "t101": "Rupa bumi berbeza bagi setiap jentera", "t102": "Luar talian · Motion Base", "t103": "Simulator", "t104": "Sedia dibekal", "t105": "Simulator Dron Pertanian", "t106": "Dari pengenalan peralatan dan asas kawalan hingga semburan baja dan racun di sawah padi, ladang mangga Harumanis dan ladang jagung.", "t107": "9 modul, rubrik 100 mata", "t108": "Rekod pelatih dan cetakan PDF", "t109": "Alat kawalan jauh sebenar melalui USB", "t110": "Luar talian", "t111": "Modul VR", "t112": "Sedia dibekal", "t113": "VR MyGAP", "t114": "Amalan baik pensijilan MyGAP diterokai langkah demi langkah di ladang maya.", "t115": "VR", "t116": "Modul VR", "t117": "Sedia dibekal", "t118": "VR Ladang Durian &amp; Strawberi", "t119": "Lawatan ladang durian dan strawberi secara maya untuk pameran dan pembelajaran.", "t120": "VR", "t121": "Simulator", "t122": "Sedia dibekal", "t123": "Simulator Bot Perikanan", "t124": "Operasi pukat jerut dan pukat tunda dengan fizik bot enam darjah kebebasan, cuaca buruk dan pelayaran malam.", "t125": "9 modul latihan", "t126": "Beban tangkapan, suhu enjin dan penggunaan bahan api", "t127": "Luar talian · Motion Base", "t128": "Modul VR", "t129": "Demo tersedia", "t130": "VR Krew Pukat Jerut", "t131": "Pemain menjadi krew bot nelayan: menurunkan unjam, melabuh pukat dan menaikkan hasil tangkapan dengan kawalan tangan.", "t132": "Direka untuk kanak-kanak dan orang awam", "t133": "Meta Quest 3", "t134": "Modul VR", "t135": "Sedia dibekal", "t136": "VR Krew Pukat Tunda", "t137": "Modul ekspo yang membawa pengunjung ke geladak bot pukat tunda, lengkap dengan kawalan winch.", "t138": "VR", "t139": "Modul VR", "t140": "Sedia dibekal", "t141": "VR Sayangi Laut Kita", "t142": "Menyelam di taman laut Malaysia sebagai penyelam konservasi: mengutip sampah dan membiak karang dalam had masa.", "t143": "Pilihan tapak selaman", "t144": "Had masa dan markah boleh dilaras", "t145": "Video 360 dasar laut", "t146": "Meta Quest 3", "t147": "Simulator", "t148": "Demo tersedia", "t149": "SIM-SAWIT Angkut", "t150": "Pengangkutan buah tandan segar dengan traktor mini dan treler di ladang sawit. Modul dirangka selari dengan latihan mekanisasi ladang sawit.", "t151": "5 modul berskor, mod cabaran dan mod bebas", "t152": "Konsol jurulatih di tablet", "t153": "Motion Base mengikut permukaan tanah", "t154": "Luar talian · Motion Base", "t155": "Simulator", "t156": "Demo tersedia", "t157": "Simulator Misi Bot Peronda", "t158": "Enam misi pendek berinspirasikan tugas penguatkuasaan maritim di perairan Malaysia, termasuk rondaan pulau-pulau Langkawi. Sesuai untuk pengunjung pameran.", "t159": "Stereng, tuil pecutan dan pemilih gear", "t160": "Mod grafik AAA dan Ringan", "t161": "Motion Base", "t162": "Simulator", "t163": "Demo tersedia", "t164": "NAKHODA Simulator Kapal", "t165": "Pengendalian kapal dengan konsol kawalan kapal, ombak laut masa nyata dan penentukuran kawalan berpandu.", "t166": "Transkrip kompetensi bercetak", "t167": "Luar talian", "t168": "Simulator", "t169": "Sedia dibekal", "t170": "Simulator Kren STS", "t171": "Kren ship-to-shore dengan fizik ayunan kontena, pelan bay berturutan dan cuaca yang mempengaruhi ayunan troli.", "t172": "Rubrik: masa, ayunan, ketepatan, keselamatan", "t173": "Mod jurulatih di tablet dengan paparan 3D spreader", "t174": "Laporan CSV dan bercetak", "t175": "Motion Base", "t176": "Simulator", "t177": "Demo tersedia", "t178": "Simulator Ekskavator", "t179": "Jengkaut berkaki ulat dari pandangan kabin, dengan dua tuil joystick sebagai konsol kiri dan kanan.", "t180": "Tetapan kawalan boleh diubah dan disimpan", "t181": "Pengesanan sentuhan timba dengan tanah", "t182": "Konsol dwi-joystick", "t183": "Simulator", "t184": "Demo tersedia", "t185": "Simulator Jengkaut-Pengaut", "t186": "Backhoe loader dengan fizik tanah berzarah, ram hidraulik berfungsi dan urutan hidup enjin sebelum kerja bermula.", "t187": "Corak tuil ISO dan SAE", "t188": "Amaran perlanggaran lengan", "t189": "Skrin pengawal di tablet", "t190": "Motion Base", "t191": "Simulator", "t192": "Demo tersedia", "t193": "Simulator Forklif", "t194": "Tujuh modul latihan forklif yang diselaraskan dengan keperluan AKKP 1994, JKKP dan NIOSH.", "t195": "Persekitaran gudang dengan bunyi jentera", "t196": "Luar talian", "t197": "Simulator", "t198": "Dalam pembangunan", "t199": "Sim Pandu Lasak 4WD", "t200": "Kira-kira 3 km jalan kampung dan 3 km laluan lasak merentas ladang getah dan sawit, untuk merasai ciri pacuan empat roda.", "t201": "Stereng force-feedback, gear dan brek tangan", "t202": "Lopak air dan lumpur", "t203": "Peta bandar dirancang", "t204": "Motion Base", "t205": "Perkhidmatan", "t206": "Tiga cara bekerjasama.", "t207": "Jualan sistem", "t208": "Sistem simulator dan VR lengkap: perisian, PC, paparan, kawalan dan Motion Base, dipasang dan diuji di premis anda.", "t209": "Sewaan pameran", "t210": "Unit simulator dan VR untuk ekspo, hari terbuka dan program jangkauan, dengan senario pendek yang sesuai untuk orang awam.", "t211": "Pembangunan tersuai", "t212": "Simulator atau modul VR baharu mengikut jentera, kurikulum dan prosedur kerja organisasi anda.", "t213": "Klien kami", "t214": "Dipercayai agensi pertanian dan perikanan negara.", "t215": "Hubungi kami", "t216": "Minta demo atau sebut harga.", "t217": "Ibu pejabat", "t218": "E-mel", "t219": "Telefon", "t220": "Nama anda", "t221": "Organisasi", "t222": "E-mel", "t223": "Telefon (pilihan)", "t224": "Sektor", "t225": "Pertanian", "t226": "Perikanan", "t227": "Sawit dan komoditi", "t228": "Maritim dan pelabuhan", "t229": "Binaan", "t230": "Pandu lasak", "t231": "Jenis pertanyaan", "t232": "Demo simulator", "t233": "Pembelian sistem", "t234": "Sewaan untuk pameran", "t235": "Pembangunan perisian tersuai", "t236": "Mesej", "t237": "Hantar pertanyaan", "t238": "Pertanyaan anda dihantar terus kepada pasukan MSIMS melalui e-mel. Kami membalas ke alamat yang anda beri.", "t239": "© 2026 MSIMS Tech Services<br>Simulator dan VR buatan Malaysia"};
+  var MSG={
+    en:{sending:"Sending…",sent:"Sent. Thank you, we will reply by email.",invalid:"Please enter your name and a valid email address.",rate:"Too many attempts. Please try again later.",fail:"Could not send. Please email sales@msims.tech instead."},
+    ms:{sending:"Menghantar…",sent:"Dihantar. Terima kasih, kami akan membalas melalui e-mel.",invalid:"Sila isi nama dan alamat e-mel yang sah.",rate:"Terlalu banyak cubaan. Sila cuba sebentar lagi.",fail:"Tidak dapat dihantar. Sila e-mel sales@msims.tech."}
+  };
+  var lang="en",EN={},ENPH={},lastMsg=null;
+  var tnodes=[].slice.call(document.querySelectorAll("[data-i]"));
+  var pnodes=[].slice.call(document.querySelectorAll("[data-i-ph]"));
+  tnodes.forEach(function(n){EN[n.getAttribute("data-i")]=n.innerHTML});
+  pnodes.forEach(function(n){ENPH[n.getAttribute("data-i-ph")]=n.getAttribute("placeholder")});
+  function setLang(l,save){
+    lang=l==="ms"?"ms":"en";
+    document.documentElement.lang=lang;
+    var T=lang==="ms"?MS:EN,P=lang==="ms"?MS:ENPH;
+    tnodes.forEach(function(n){n.innerHTML=T[n.getAttribute("data-i")]});
+    pnodes.forEach(function(n){n.setAttribute("placeholder",P[n.getAttribute("data-i-ph")])});
+    [].forEach.call(document.querySelectorAll(".lang button"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-lang")===lang?"true":"false")});
+    hud();readouts();
+    if(lastMsg)say(lastMsg.k,lastMsg.err);
+    if(save){try{localStorage.setItem("msims-lang",lang)}catch(e){}}
+  }
+  [].forEach.call(document.querySelectorAll(".lang button"),function(b){b.addEventListener("click",function(){setLang(b.getAttribute("data-lang"),true)})});
 
   /* ---------- navigasi dalam laman ---------- */
   document.addEventListener("click",function(e){
@@ -653,17 +683,11 @@ footer.site p{line-height:1.5}
   /* ---------- katalog: tapis ikut sektor ---------- */
   var prods=[].slice.call(document.querySelectorAll("#prods .prod"));
   var fbtns=[].slice.call(document.querySelectorAll(".filters button"));
-  $("n-prod").textContent=prods.length;
-  fbtns.forEach(function(b){
-    var f=b.getAttribute("data-f");
-    var n=f==="semua"?prods.length:prods.filter(function(p){return p.getAttribute("data-s")===f}).length;
-    var s=document.createElement("span");s.textContent=n;b.appendChild(s);
-    b.addEventListener("click",function(){setFilter(f)});
-  });
   function setFilter(f){
     fbtns.forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-f")===f?"true":"false")});
     prods.forEach(function(p){p.hidden=!(f==="semua"||p.getAttribute("data-s")===f)});
   }
+  fbtns.forEach(function(b){b.addEventListener("click",function(){setFilter(b.getAttribute("data-f"))})});
   [].forEach.call(document.querySelectorAll("[data-go]"),function(b){
     b.addEventListener("click",function(){
       setFilter(b.getAttribute("data-go"));
@@ -671,27 +695,24 @@ footer.site p{line-height:1.5}
     });
   });
 
-  /* ---------- borang pertanyaan ---------- */
-  var fo=$("f-org"),fn=$("f-nama"),fs=$("f-sektor"),fj=$("f-jenis"),fc=$("f-nota"),out=$("f-out"),mail=$("f-mail"),stat=$("f-status");
-  function compose(){
-    var who=[fn.value.trim(),fo.value.trim()].filter(Boolean).join(", ");
-    var m="Salam sejahtera MSIMS,\n\n"+
-      (who?"Saya "+who+". ":"")+
-      "Kami ingin bertanya tentang: "+fj.value+".\nSektor: "+fs.value+"."+
-      (fc.value.trim()?"\n\nCatatan: "+fc.value.trim():"")+
-      "\n\nMohon hubungi kami semula. Terima kasih.";
-    out.value=m;
-    mail.href="mailto:sales@msims.tech?subject="+encodeURIComponent(fj.value+" · "+fs.value)+"&body="+encodeURIComponent(m);
-  }
-  [fo,fn,fs,fj,fc].forEach(function(el){el.addEventListener("input",compose);el.addEventListener("change",compose)});
-  compose();
-  $("tanya").addEventListener("submit",function(e){e.preventDefault()});
-  $("f-copy").addEventListener("click",function(){
-    function ok(){stat.textContent="Mesej disalin.";setTimeout(function(){stat.textContent=""},2500)}
-    function fallback(){try{out.focus();out.select();document.execCommand("copy");ok()}catch(err){stat.textContent="Pilih teks mesej dan salin secara manual."}}
-    try{
-      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(out.value).then(ok,fallback)}else{fallback()}
-    }catch(err){fallback()}
+  /* ---------- borang pertanyaan: dihantar oleh send.php di pelayan ---------- */
+  var form=$("tanya"),stat=$("f-status"),sendBtn=$("f-send");
+  function say(k,err){lastMsg={k:k,err:!!err};stat.textContent=MSG[lang][k];stat.className=err?"err":""}
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    var nm=$("f-nama"),em=$("f-email");
+    var okMail=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value.trim());
+    if(!nm.value.trim()||!okMail){say("invalid",true);(nm.value.trim()?em:nm).focus();return}
+    var fd=new FormData(form);fd.append("lang",lang);
+    sendBtn.disabled=true;say("sending");
+    fetch(form.getAttribute("action"),{method:"POST",body:fd,headers:{"Accept":"application/json"}})
+      .then(function(r){return r.json().then(function(j){return {s:r.status,j:j}})})
+      .then(function(x){
+        if(x.j&&x.j.ok){say("sent");form.reset()}
+        else{say(x.s===429?"rate":(x.s===422?"invalid":"fail"),true)}
+      })
+      .catch(function(){say("fail",true)})
+      .then(function(){sendBtn.disabled=false});
   });
 
   /* ---------- konsol simulasi (kanvas) ---------- */
@@ -704,17 +725,17 @@ footer.site p{line-height:1.5}
   function mod(a,n){return ((a%n)+n)%n}
 
   var S={
-    padi:{scn:"Sawah padi",prod:"Jentuai Padi",col:[201,217,74],v:2.2,eye:2.6,unit:"km/j",k:3.6,
+    padi:{scn:{en:"Paddy field",ms:"Sawah padi"},prod:{en:"Combine Harvester",ms:"Jentuai Padi"},col:[201,217,74],v:2.2,eye:2.6,sea:false,k:3.6,
       h:function(x,z){var bz=mod(z,14)-7,bx=mod(x,18)-9;return .34*Math.exp(-bz*bz/.5)+.34*Math.exp(-bx*bx/.5)+.05*vn(x*.6,z*.6)}},
-    ikan:{scn:"Laut pesisir",prod:"Bot Perikanan",col:[79,211,230],v:4,eye:3.2,unit:"knot",k:1.944,
+    ikan:{scn:{en:"Coastal waters",ms:"Laut pesisir"},prod:{en:"Fishing Vessel",ms:"Bot Perikanan"},col:[79,211,230],v:4,eye:3.2,sea:true,k:1.944,
       h:function(x,z,t){return .42*Math.sin(z*.35+t*1.1+x*.08)+.22*Math.sin(x*.5-t*.8+z*.12)+.1*Math.sin((x+z)*.9+t*1.7)}},
-    sawit:{scn:"Ladang sawit",prod:"SIM-SAWIT Angkut",col:[255,138,60],v:3,eye:2.4,unit:"km/j",k:3.6,palms:true,
+    sawit:{scn:{en:"Oil palm estate",ms:"Ladang sawit"},prod:{en:"SIM-SAWIT Haulage",ms:"SIM-SAWIT Angkut"},col:[255,138,60],v:3,eye:2.4,sea:false,k:3.6,palms:true,
       h:function(x,z){return 1.6*vn(x/16+5,z/16)+.18*vn(x/2.2,z/2.2)}},
-    maritim:{scn:"Perairan terbuka",prod:"Misi Bot Peronda",col:[122,167,255],v:12,eye:3.4,unit:"knot",k:1.944,
+    maritim:{scn:{en:"Open waters",ms:"Perairan terbuka"},prod:{en:"Patrol Boat Missions",ms:"Misi Bot Peronda"},col:[122,167,255],v:12,eye:3.4,sea:true,k:1.944,
       h:function(x,z,t){return .75*Math.sin(z*.16+t*.9+x*.03)+.3*Math.sin(x*.3-t*.7+z*.1)+.12*Math.sin((x-z)*.7+t*1.9)}},
-    bina:{scn:"Tapak korekan",prod:"Ekskavator",col:[255,210,31],v:1.2,eye:3,unit:"km/j",k:3.6,
+    bina:{scn:{en:"Excavation site",ms:"Tapak korekan"},prod:{en:"Excavator",ms:"Ekskavator"},col:[255,210,31],v:1.2,eye:3,sea:false,k:3.6,
       h:function(x,z){var n=vn(x/20+2,z/20+7)*4,s=Math.floor(n),e=Math.min(1,(n-s)/.18);return (s+e*e*(3-2*e))*.9+.06*vn(x*.9,z*.9)}},
-    lasak:{scn:"Laluan lasak",prod:"Pandu Lasak 4WD",col:[232,128,92],v:5,eye:2.2,unit:"km/j",k:3.6,
+    lasak:{scn:{en:"Off-road trail",ms:"Laluan lasak"},prod:{en:"4WD Off-Road",ms:"Pandu Lasak 4WD"},col:[232,128,92],v:5,eye:2.2,sea:false,k:3.6,
       h:function(x,z){return 1.3*vn(x/11,z/11+3)+.4*vn(x/3,z/3)+.12*vn(x*1.3,z*1.3)}}
   };
 
@@ -821,7 +842,7 @@ footer.site p{line-height:1.5}
     var s=S[cur];
     rp.textContent=sgn(pitch*57.2958,1);rr.textContent=sgn(roll*57.2958,1);
     rh.textContent=sgn((heave-avg)*100,0);
-    rl.textContent=Math.round(s.v*s.k);ru.textContent=s.unit;
+    rl.textContent=Math.round(s.v*s.k);ru.textContent=s.sea?"knot":(lang==="ms"?"km/j":"km/h");
   }
 
   var raf=0,last=0,running=false,inView=true;
@@ -835,11 +856,12 @@ footer.site p{line-height:1.5}
   function stop(){running=false;cancelAnimationFrame(raf)}
   function still(){for(var i=0;i<30;i++)step(.033);draw();readouts()}
 
+  function hud(){var s=S[cur];$("hud-scn").textContent=s.scn[lang];$("hud-prod").textContent=s.prod[lang]}
   function select(k){
     cur=k;first=true;
     var s=S[k];
     con.style.setProperty("--sc",rgba(s.col,1));
-    $("hud-scn").textContent=s.scn;$("hud-prod").textContent=s.prod;
+    hud();
     [].forEach.call(con.querySelectorAll(".tabs button"),function(b){b.setAttribute("aria-selected",b.getAttribute("data-k")===k?"true":"false")});
     still();
   }
@@ -850,6 +872,10 @@ footer.site p{line-height:1.5}
   if(window.IntersectionObserver){new IntersectionObserver(function(en){inView=en[0].isIntersecting;if(inView)start();else stop()}).observe(view)}
   document.addEventListener("visibilitychange",function(){if(document.hidden)stop();else start()});
   start();
+
+  /* bahasa: pilihan tersimpan jika ada, jika tidak Inggeris */
+  var saved=null;try{saved=localStorage.getItem("msims-lang")}catch(e){}
+  if(saved==="ms")setLang("ms",false);
 })();
 </script>
 </body>
