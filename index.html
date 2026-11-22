@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#14202b">
+<title>Penjana Lesen MSIMS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="app.css?v=1">
+</head>
+<body>
+<div class="bungkus">
+<header class="kepala">
+  <div class="jenama"><small>MSIMS · Motion and Simulation System</small><h1>Penjana Lesen</h1></div>
+  <span class="ruang"></span>
+  <span id="cipStatus" class="cip">Menyambung…</span>
+</header>
+
+<main class="grid">
+<div class="lajur">
+
+  <!-- 1 · KUNCI -->
+  <section class="kad" id="kadKunci">
+    <div id="vMula">
+      <h2><span class="no">1</span>Buka kunci</h2>
+      <div id="mesejMula" class="mesej samar">Menyambung ke pelayan…</div>
+      <div class="aksi"><button id="btnCubaStatus" hidden>Cuba lagi</button></div>
+    </div>
+
+    <div id="vSedia" hidden>
+      <h2><span class="no">1</span><span id="tajukSedia">Sediakan kali pertama</span></h2>
+      <p class="sub" id="subSedia"></p>
+      <label class="medan" for="failKunci">Fail kunci rahsia (MSIMS-KunciRahsia-ASAL.json atau -dilindungi.json)</label>
+      <input type="file" id="failKunci" accept=".json,application/json">
+      <div id="sediaLama" hidden>
+        <label class="medan" for="laluanFail">Kata laluan fail kunci itu</label><input type="password" id="laluanFail" autocomplete="off">
+      </div>
+      <div id="sediaBaru" hidden>
+        <div class="baris">
+          <div><label class="medan" for="laluan1">Kata laluan laman ini (min. 12 aksara)</label><input type="password" id="laluan1" autocomplete="new-password"></div>
+          <div><label class="medan" for="laluan2">Ulang kata laluan</label><input type="password" id="laluan2" autocomplete="new-password"></div>
+        </div>
+      </div>
+      <button id="btnSedia" class="utama besar" disabled>Simpan &amp; buka kunci</button>
+      <div id="sediaMesej" class="mesej"></div>
+      <button id="btnBatalSedia" class="pautan" hidden>Kembali ke kata laluan</button>
+    </div>
+
+    <div id="vBuka" hidden>
+      <h2><span class="no">1</span>Buka kunci</h2>
+      <p class="sub">Masukkan kata laluan anda untuk mula menjana lesen.</p>
+      <label class="medan" for="laluan">Kata laluan</label>
+      <div class="jalur"><input type="password" id="laluan" autocomplete="current-password"><button id="btnBuka" class="utama">Buka</button></div>
+      <div id="mesejBuka" class="mesej"></div>
+      <button id="btnTukarFail" class="pautan">Lupa kata laluan? Tetapkan semula dengan fail kunci</button>
+    </div>
+
+    <div id="vDibuka" hidden>
+      <h2><span class="no">1</span>Kunci dibuka</h2>
+      <p class="sub atas-0">Dikunci semula automatik selepas 15 minit tanpa aktiviti, atau apabila halaman ditutup.</p>
+      <div class="aksi"><button id="btnKunciSemula">Kunci sekarang</button></div>
+      <div id="mesejKunci" class="mesej"></div>
+    </div>
+  </section>
+
+  <!-- 2 · JANA -->
+  <section class="kad" id="kadJana">
+    <h2><span class="no">2</span>Jana lesen</h2>
+    <p class="sub">Tampal mesej permintaan pelanggan. ID Mesin dan produk dikesan secara automatik.</p>
+    <label class="medan" for="permintaan">ID Mesin / mesej pelanggan</label>
+    <textarea id="permintaan" rows="3" placeholder="PERMINTAAN LESEN MSIMS&#10;Produk: SIM-SAWIT ANGKUT (SAWIT)&#10;ID Mesin: F5V0-7FA4-6RR1-NZW8-1" spellcheck="false" autocapitalize="characters"></textarea>
+    <div id="kesan" class="kesan samar">Contoh di atas. ID Mesin dipaparkan pada skrin Pengaktifan Lesen simulator.</div>
+
+    <div class="baris">
+      <div><label class="medan" for="produk">Produk</label><select id="produk"></select></div>
+      <div id="bungkusLain" hidden><label class="medan" for="produkLain">Kod produk</label><input type="text" id="produkLain" placeholder="cth. SIMBARU" autocapitalize="characters" spellcheck="false"></div>
+    </div>
+
+    <label class="medan" id="lblJenis">Jenis lesen</label>
+    <div class="seg" role="radiogroup" aria-labelledby="lblJenis">
+      <label><input type="radio" name="jenis" value="KEKAL"><b>Kekal</b><span>Tiada tamat · PC ini sahaja</span></label>
+      <label><input type="radio" name="jenis" value="TEMPOH" checked><b>Tempoh</b><span>Tamat pada tarikh</span></label>
+      <label><input type="radio" name="jenis" value="PERCUBAAN"><b>Percubaan</b><span>Hari &amp; kali terhad</span></label>
+      <label><input type="radio" name="jenis" value="TERSUAI"><b>Tersuai</b><span>Tetapkan sendiri</span></label>
+    </div>
+
+    <div class="panel" id="pKEKAL" hidden>
+      <div class="nota">Lesen <b>kekal</b>: tiada tarikh tamat dan tanpa had penggunaan, tetapi <b>hanya sah pada komputer dengan ID Mesin ini</b>. Jika disalin ke PC lain, ia ditolak. Jika pelanggan menukar cakera atau memasang semula Windows, ID Mesin berubah dan lesen baharu diperlukan.</div>
+    </div>
+    <div class="panel" id="pTEMPOH">
+      <div class="cipan" id="cipanBulan">
+        <button type="button" data-bulan="1">1 bulan</button><button type="button" data-bulan="3" aria-pressed="true">3 bulan</button><button type="button" data-bulan="6">6 bulan</button><button type="button" data-bulan="12">1 tahun</button><button type="button" data-bulan="24">2 tahun</button>
+      </div>
+      <label class="medan" for="tamatTempoh">Tarikh tamat</label><input type="date" id="tamatTempoh">
+    </div>
+    <div class="panel" id="pPERCUBAAN" hidden>
+      <div class="baris">
+        <div><label class="medan" for="hariCuba">Tempoh (hari)</label><input type="number" id="hariCuba" min="1" max="365" value="14" inputmode="numeric"></div>
+        <div><label class="medan" for="hadCuba">Had dibuka (kali)</label><input type="number" id="hadCuba" min="1" max="16777215" value="30" inputmode="numeric"></div>
+      </div>
+    </div>
+    <div class="panel" id="pTERSUAI" hidden>
+      <div class="baris">
+        <div><label class="medan" for="tamatSuai">Tarikh tamat</label><input type="date" id="tamatSuai"></div>
+        <div><label class="medan" for="hadSuai">Had dibuka (kali)</label><input type="number" id="hadSuai" min="1" max="16777215" value="200" inputmode="numeric"></div>
+      </div>
+      <div class="baris">
+        <label class="semak"><input type="checkbox" id="tiadaTamat"> Tiada tarikh tamat</label>
+        <label class="semak"><input type="checkbox" id="tiadaHad"> Tanpa had penggunaan</label>
+      </div>
+    </div>
+
+    <div class="baris">
+      <div><label class="medan" for="pelanggan">Pelanggan / lokasi</label><input type="text" id="pelanggan" placeholder="cth. Kolej Vokasional Jengka"></div>
+      <div><label class="medan" for="catatan">Catatan (rekod anda)</label><input type="text" id="catatan" placeholder="cth. invois #123"></div>
+    </div>
+
+    <div id="ringkasan" class="ringkasan"></div>
+    <button id="btnJana" class="utama besar" disabled>Buka kunci dahulu</button>
+    <div id="mesejJana" class="mesej"></div>
+
+    <div id="hasil" class="hasil" hidden>
+      <div class="atas"><span id="capHasil" class="cap"></span><strong id="hasilTajuk"></strong></div>
+      <div id="hasilButir" class="r3"></div>
+      <pre id="hasilKunci" class="kunci"></pre>
+      <div class="aksi">
+        <a id="lnkWa" class="btn wa" href="#" target="_blank" rel="noopener">Hantar WhatsApp</a>
+        <button id="btnSalinMesej">Salin mesej</button>
+        <button id="btnSalinKunci">Salin kunci sahaja</button>
+        <button id="btnTxt">Fail .txt</button>
+      </div>
+      <div id="mesejHasil" class="mesej"></div>
+    </div>
+  </section>
+</div>
+
+</div>
+
+<div class="lajur">
+  <!-- DAFTAR -->
+  <section class="kad">
+    <h2>Daftar lesen <span id="bilDaftar" class="samar bil"></span></h2>
+    <p class="sub" id="sumberDaftar">Disimpan di license.msims.tech: daftar yang sama di semua peranti anda.</p>
+    <div class="daftar-atas">
+      <input type="search" id="cari" placeholder="Cari pelanggan, ID Mesin, produk…" aria-label="Cari dalam daftar">
+    </div>
+    <ul id="senaraiDaftar" class="daftar"></ul>
+    <div class="aksi">
+      <button id="btnCsv">Eksport CSV</button>
+      <button id="btnSandar">Sandaran .json</button>
+      <button id="btnPulih">Pulihkan sandaran…</button>
+      <input type="file" id="failPulih" accept=".json,application/json" hidden>
+    </div>
+    <div id="mesejDaftar" class="mesej"></div>
+  </section>
+
+  <!-- LANJUTAN -->
+  <section class="kad">
+    <h2>Lanjutan</h2>
+    <details class="lanjut">
+      <summary>Semak kunci lesen</summary>
+      <div class="isi">
+        <textarea id="semakTeks" rows="3" placeholder="Tampal kunci MSIMS-… (atau seluruh mesej)" spellcheck="false"></textarea>
+        <div class="aksi"><button id="btnSemak">Semak</button></div>
+        <div id="hasilSemak" class="mesej"></div>
+      </div>
+    </details>
+    <details class="lanjut">
+      <summary>Tukar kata laluan</summary>
+      <div class="isi">
+        <p class="samar kecil">Kata laluan baharu berkuat kuasa pada semua peranti. Buka kunci dahulu.</p>
+        <div class="baris">
+          <div><label class="medan" for="laluanE1">Kata laluan baharu (min. 12 aksara)</label><input type="password" id="laluanE1" autocomplete="new-password"></div>
+          <div><label class="medan" for="laluanE2">Ulang kata laluan</label><input type="password" id="laluanE2" autocomplete="new-password"></div>
+        </div>
+        <div class="aksi"><button id="btnTukar" disabled>Tukar kata laluan</button></div>
+        <div id="mesejEksport" class="mesej"></div>
+      </div>
+    </details>
+    <details class="lanjut">
+      <summary>Sandaran fail kunci</summary>
+      <div class="isi">
+        <p class="samar kecil">Muat turun salinan kunci yang dilindungi kata laluan semasa anda. Simpan di pendrive dan Drive peribadi: ia diperlukan jika anda terlupa kata laluan.</p>
+        <div class="aksi"><button id="btnSandarKunci" disabled>Muat turun fail kunci dilindungi</button></div>
+        <div id="mesejSandarKunci" class="mesej"></div>
+      </div>
+    </details>
+    <details class="lanjut">
+      <summary>Kunci awam simulator</summary>
+      <div class="isi">
+        <p class="samar kecil">Terbina dalam <span class="mono">LesenKunciAwam.h</span> semua simulator MSIMS:</p>
+        <code class="awam" id="awamHex"></code>
+      </div>
+    </details>
+  </section>
+  <p class="kaki">Lesen ditandatangani Ed25519 di dalam pelayar ini dan terikat pada ID Mesin. Pelayan hanya menyimpan kunci yang disulitkan dan daftar lesen.</p>
+</div>
+</main>
+</div>
+<script type="module" src="app.js?v=1"></script>
+</body>
+</html>
