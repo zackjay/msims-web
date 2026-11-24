@@ -3,73 +3,72 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
 <meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#14202b">
-<title>Penjana Lesen MSIMS</title>
+<title>MSIMS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="app.css?v=1">
+<link rel="stylesheet" href="app.css?v=2">
 </head>
 <body>
-<div class="bungkus">
+<!-- PINTU: log masuk / tetapkan kata laluan -->
+<div id="skrinLog" class="pintu">
+  <section class="kad pintu-kad">
+    <div class="jenama"><small>MSIMS · Motion and Simulation System</small><h1 id="tajukPintu">Log masuk</h1></div>
+
+    <form id="borangLog" autocomplete="on" novalidate>
+      <div id="panelLog">
+        <label class="medan" for="nama">Nama pengguna</label>
+        <input type="text" id="nama" name="username" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false">
+        <label class="medan" for="laluan">Kata laluan</label>
+        <input type="password" id="laluan" name="password" autocomplete="current-password">
+        <button type="submit" id="btnMasuk" class="utama besar">Log masuk</button>
+        <div id="mesejLog" class="mesej"></div>
+        <button type="button" id="btnLupa" class="pautan">Lupa kata laluan? Tetapkan semula dengan fail kunci</button>
+      </div>
+    </form>
+
+    <form id="borangSedia" autocomplete="on" novalidate>
+      <div id="panelSedia" hidden>
+        <p class="sub" id="subSedia"></p>
+        <label class="medan" for="namaBaru">Nama pengguna baharu</label>
+        <input type="text" id="namaBaru" name="username" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="cth. zack">
+        <div class="baris">
+          <div><label class="medan" for="laluan1">Kata laluan baharu (min. 12 aksara)</label><input type="password" id="laluan1" name="new-password" autocomplete="new-password"></div>
+          <div><label class="medan" for="laluan2">Ulang kata laluan</label><input type="password" id="laluan2" autocomplete="new-password"></div>
+        </div>
+        <label class="medan" for="failKunci">Fail kunci rahsia (MSIMS-KunciRahsia-ASAL.json atau -dilindungi.json)</label>
+        <input type="file" id="failKunci" accept=".json,application/json">
+        <div id="sediaLama" hidden>
+          <label class="medan" for="laluanFail">Kata laluan fail kunci itu</label><input type="password" id="laluanFail" autocomplete="off">
+        </div>
+        <button type="submit" id="btnSedia" class="utama besar">Simpan &amp; masuk</button>
+        <div id="sediaMesej" class="mesej"></div>
+        <button type="button" id="btnBatalSedia" class="pautan">Kembali ke log masuk</button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<!-- APLIKASI: hanya dipaparkan selepas log masuk -->
+<div id="skrinApp" class="bungkus" hidden>
 <header class="kepala">
   <div class="jenama"><small>MSIMS · Motion and Simulation System</small><h1>Penjana Lesen</h1></div>
   <span class="ruang"></span>
-  <span id="cipStatus" class="cip">Menyambung…</span>
+  <span class="cip buka" id="namaLog"></span>
+  <button id="btnLogKeluar">Log keluar</button>
 </header>
+<div id="mesejApp" class="mesej"></div>
 
 <main class="grid">
 <div class="lajur">
 
-  <!-- 1 · KUNCI -->
-  <section class="kad" id="kadKunci">
-    <div id="vMula">
-      <h2><span class="no">1</span>Buka kunci</h2>
-      <div id="mesejMula" class="mesej samar">Menyambung ke pelayan…</div>
-      <div class="aksi"><button id="btnCubaStatus" hidden>Cuba lagi</button></div>
-    </div>
-
-    <div id="vSedia" hidden>
-      <h2><span class="no">1</span><span id="tajukSedia">Sediakan kali pertama</span></h2>
-      <p class="sub" id="subSedia"></p>
-      <label class="medan" for="failKunci">Fail kunci rahsia (MSIMS-KunciRahsia-ASAL.json atau -dilindungi.json)</label>
-      <input type="file" id="failKunci" accept=".json,application/json">
-      <div id="sediaLama" hidden>
-        <label class="medan" for="laluanFail">Kata laluan fail kunci itu</label><input type="password" id="laluanFail" autocomplete="off">
-      </div>
-      <div id="sediaBaru" hidden>
-        <div class="baris">
-          <div><label class="medan" for="laluan1">Kata laluan laman ini (min. 12 aksara)</label><input type="password" id="laluan1" autocomplete="new-password"></div>
-          <div><label class="medan" for="laluan2">Ulang kata laluan</label><input type="password" id="laluan2" autocomplete="new-password"></div>
-        </div>
-      </div>
-      <button id="btnSedia" class="utama besar" disabled>Simpan &amp; buka kunci</button>
-      <div id="sediaMesej" class="mesej"></div>
-      <button id="btnBatalSedia" class="pautan" hidden>Kembali ke kata laluan</button>
-    </div>
-
-    <div id="vBuka" hidden>
-      <h2><span class="no">1</span>Buka kunci</h2>
-      <p class="sub">Masukkan kata laluan anda untuk mula menjana lesen.</p>
-      <label class="medan" for="laluan">Kata laluan</label>
-      <div class="jalur"><input type="password" id="laluan" autocomplete="current-password"><button id="btnBuka" class="utama">Buka</button></div>
-      <div id="mesejBuka" class="mesej"></div>
-      <button id="btnTukarFail" class="pautan">Lupa kata laluan? Tetapkan semula dengan fail kunci</button>
-    </div>
-
-    <div id="vDibuka" hidden>
-      <h2><span class="no">1</span>Kunci dibuka</h2>
-      <p class="sub atas-0">Dikunci semula automatik selepas 15 minit tanpa aktiviti, atau apabila halaman ditutup.</p>
-      <div class="aksi"><button id="btnKunciSemula">Kunci sekarang</button></div>
-      <div id="mesejKunci" class="mesej"></div>
-    </div>
-  </section>
-
   <!-- 2 · JANA -->
   <section class="kad" id="kadJana">
-    <h2><span class="no">2</span>Jana lesen</h2>
+    <h2>Jana lesen</h2>
     <p class="sub">Tampal mesej permintaan pelanggan. ID Mesin dan produk dikesan secara automatik.</p>
     <label class="medan" for="permintaan">ID Mesin / mesej pelanggan</label>
     <textarea id="permintaan" rows="3" placeholder="PERMINTAAN LESEN MSIMS&#10;Produk: SIM-SAWIT ANGKUT (SAWIT)&#10;ID Mesin: F5V0-7FA4-6RR1-NZW8-1" spellcheck="false" autocapitalize="characters"></textarea>
@@ -120,7 +119,7 @@
     </div>
 
     <div id="ringkasan" class="ringkasan"></div>
-    <button id="btnJana" class="utama besar" disabled>Buka kunci dahulu</button>
+    <button id="btnJana" class="utama besar">Jana lesen</button>
     <div id="mesejJana" class="mesej"></div>
 
     <div id="hasil" class="hasil" hidden>
@@ -170,14 +169,15 @@
       </div>
     </details>
     <details class="lanjut">
-      <summary>Tukar kata laluan</summary>
+      <summary>Tukar nama pengguna / kata laluan</summary>
       <div class="isi">
-        <p class="samar kecil">Kata laluan baharu berkuat kuasa pada semua peranti. Buka kunci dahulu.</p>
+        <p class="samar kecil">Berkuat kuasa pada semua peranti sebaik sahaja disimpan.</p>
+        <label class="medan" for="namaE">Nama pengguna</label><input type="text" id="namaE" autocomplete="off" autocapitalize="none" spellcheck="false">
         <div class="baris">
           <div><label class="medan" for="laluanE1">Kata laluan baharu (min. 12 aksara)</label><input type="password" id="laluanE1" autocomplete="new-password"></div>
           <div><label class="medan" for="laluanE2">Ulang kata laluan</label><input type="password" id="laluanE2" autocomplete="new-password"></div>
         </div>
-        <div class="aksi"><button id="btnTukar" disabled>Tukar kata laluan</button></div>
+        <div class="aksi"><button id="btnTukar" disabled>Simpan nama pengguna &amp; kata laluan</button></div>
         <div id="mesejEksport" class="mesej"></div>
       </div>
     </details>
@@ -201,6 +201,6 @@
 </div>
 </main>
 </div>
-<script type="module" src="app.js?v=1"></script>
+<script type="module" src="app.js?v=2"></script>
 </body>
 </html>

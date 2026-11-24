@@ -667,23 +667,26 @@ async function api(aksi, data) {
 function ralatApi(e) {
   const k = e && e.kod;
   if (k === 'rangkaian') return 'Tiada sambungan ke pelayan. Semak internet dan cuba lagi.';
-  if (k === 'laluan') return 'Kata laluan salah.';
+  if (k === 'laluan') return 'Nama pengguna atau kata laluan salah.';
+  if (k === 'nama') return 'Nama pengguna tidak sah.';
   if (k === 'had') return `Terlalu banyak cubaan. Cuba lagi dalam ${Math.max(1, Math.ceil((e.tunggu || 60) / 60))} minit.`;
-  if (k === 'sesi') return 'Sesi tamat. Buka kunci semula.';
-  if (k === 'belum') return 'Akaun belum disediakan. Sediakan dengan fail kunci dahulu.';
+  if (k === 'sesi') return 'Sesi tamat. Log masuk semula.';
   if (k === 'tandatangan' || k === 'data') return 'Pelayan menolak fail kunci ini: ia bukan kunci lesen MSIMS semasa.';
   if (k === 'cabaran') return 'Permintaan tamat tempoh. Cuba sekali lagi.';
   if (k === 'storan' || k === 'sodium') return 'Pelayan tidak dapat menyimpan data (' + k + '). Hubungi pentadbir hosting.';
   return 'Ralat pelayan (' + (k || 'tidak diketahui') + '). Cuba lagi.';
 }
 
-// ===================== kunci rahsia =====================
+// ===================== log masuk & kunci rahsia =====================
+// Satu nama pengguna + kata laluan: kata laluan mengesahkan anda di pelayan DAN membuka kunci rahsia di dalam pelayar.
 let KUNCI = null;            // { awam: Uint8Array, rahsia: Uint8Array } - dalam memori sahaja, hilang apabila halaman ditutup
 let OBJ_SEMASA = null;       // salinan dilindungi (bersulit) bagi kunci yang sedang dibuka
 let FAIL_DIPILIH = null;     // objek JSON fail kunci yang dipilih
-let STATUS = null;           // { sedia, garam, log } daripada pelayan
-let PAKSA_SEDIA = false;
+let NAMA = '';               // nama pengguna semasa
+let MOD = 'log';             // 'log' | 'sementara' (baru log masuk dengan akaun sementara) | 'lupa' (set semula dengan fail kunci)
 let AKTIVITI = Date.now();
+const POLA_NAMA = /^[a-z0-9._-]{3,32}$/;
+const TEKS_NAMA = 'Nama pengguna: 3 hingga 32 aksara (huruf kecil, nombor, titik atau sengkang).';
 
 async function terbitKunciAes(laluan, garam, iter) {
   const k = await crypto.subtle.importKey('raw', te.encode(laluan), 'PBKDF2', false, ['deriveKey']);
@@ -715,112 +718,97 @@ function semakLaluanBaru(a, b) {
   if (a !== b) return 'Kata laluan tidak sepadan.';
   return null;
 }
-// Daftar / tukar kata laluan di pelayan. Pelayan hanya menerima jika cabaran ditandatangani dengan kunci rahsia lesen.
-async function daftarAkaun(k, laluan, objSedia) {
-  const obj = objSedia || await lindungi(k, laluan);
+// Tetapkan nama pengguna + kata laluan di pelayan. Pelayan hanya menerima jika cabaran ditandatangani dengan kunci rahsia lesen.
+async function daftarAkaun(k, nama, laluan) {
+  const obj = await lindungi(k, laluan);
   const garam = crypto.getRandomValues(new Uint8Array(16));
   const auth = await terbitAuth(laluan, garam);
   const { nonce } = await api('cabaran');
-  const tt = await ed.signAsync(te.encode(`MSIMS-LESEN-SEDIA\n${nonce}\n${auth}\n${obj.enc.data}`), k.rahsia);
-  await api('sedia', { nonce, auth, garam: b64(garam), blob: obj, tandatangan: b64(tt) });
-  STATUS = { sedia: true, garam: b64(garam), log: true };
+  const tt = await ed.signAsync(te.encode(`MSIMS-LESEN-SEDIA\n${nonce}\n${nama}\n${auth}\n${obj.enc.data}`), k.rahsia);
+  await api('sedia', { nonce, nama, auth, garam: b64(garam), blob: obj, tandatangan: b64(tt) });
   return obj;
 }
 
-function kemasKiniKunciUI() {
-  const ada = !!(STATUS && STATUS.sedia);
-  const papar = KUNCI ? 'dibuka' : (!STATUS ? 'mula' : (ada && !PAKSA_SEDIA ? 'buka' : 'sedia'));
-  $('vMula').hidden = papar !== 'mula';
-  $('vSedia').hidden = papar !== 'sedia';
-  $('vBuka').hidden = papar !== 'buka';
-  $('vDibuka').hidden = papar !== 'dibuka';
-  $('tajukSedia').textContent = ada ? 'Tetapkan semula kata laluan' : 'Sediakan kali pertama';
-  $('subSedia').textContent = ada
-    ? 'Pilih fail kunci rahsia anda untuk menetapkan kata laluan baharu. Hanya pemegang fail kunci boleh melakukannya.'
-    : 'Sekali sahaja. Kunci rahsia disulitkan dengan kata laluan anda di dalam pelayar ini sebelum disimpan; pelayan tidak pernah menerima kata laluan atau kunci terbuka.';
-  $('btnBatalSedia').hidden = !(papar === 'sedia' && ada);
-  const c = $('cipStatus');
-  c.textContent = KUNCI ? 'Dibuka' : (!STATUS ? 'Menyambung…' : (ada ? 'Terkunci' : 'Belum disediakan'));
-  c.className = 'cip ' + (KUNCI ? 'buka' : (ada ? 'kunci' : ''));
-  $('btnJana').disabled = !KUNCI;
-  $('btnJana').textContent = KUNCI ? 'Jana lesen' : 'Buka kunci dahulu';
+function papar() {
+  $('skrinLog').hidden = !!KUNCI; $('skrinApp').hidden = !KUNCI;
+  $('panelLog').hidden = MOD !== 'log'; $('panelSedia').hidden = MOD === 'log';
+  $('tajukPintu').textContent = MOD === 'log' ? 'Log masuk' : (MOD === 'sementara' ? 'Tetapkan kata laluan anda' : 'Tetapkan semula kata laluan');
+  $('subSedia').textContent = MOD === 'sementara'
+    ? 'Anda log masuk dengan kata laluan sementara. Tetapkan nama pengguna dan kata laluan anda sendiri, dan pilih fail kunci rahsia lesen. Selepas ini hanya nama pengguna dan kata laluan diperlukan pada mana-mana peranti.'
+    : 'Pilih fail kunci rahsia lesen anda untuk menetapkan nama pengguna dan kata laluan baharu. Hanya pemegang fail kunci boleh melakukannya.';
+  $('namaLog').textContent = NAMA;
   $('btnTukar').disabled = !KUNCI; $('btnSandarKunci').disabled = !OBJ_SEMASA;
 }
-async function kunciSemula(sebab) {
+function kosongkanBorang() {
+  for (const id of ['laluan', 'laluan1', 'laluan2', 'laluanFail', 'namaBaru']) $(id).value = '';
+  $('failKunci').value = ''; $('sediaLama').hidden = true; FAIL_DIPILIH = null;
+  mesej('mesejLog', ''); mesej('sediaMesej', '');
+}
+async function logKeluar(sebab) {
   if (KUNCI) KUNCI.rahsia.fill(0);
-  KUNCI = null; OBJ_SEMASA = null; DAFTAR = [];
-  if (STATUS) STATUS.log = false;
-  kemasKiniKunciUI(); lukisDaftar();
-  mesej('mesejBuka', sebab || '', 'samar');
+  KUNCI = null; OBJ_SEMASA = null; DAFTAR = []; HASIL = null; MOD = 'log';
+  $('hasil').hidden = true;
+  kosongkanBorang(); papar(); lukisDaftar();
+  mesej('mesejLog', sebab || '', 'samar');
   try { await api('keluar'); } catch {}
 }
 async function selepasBuka(k, obj, nota) {
-  KUNCI = k; OBJ_SEMASA = obj; FAIL_DIPILIH = null; PAKSA_SEDIA = false; AKTIVITI = Date.now();
-  for (const id of ['laluan', 'laluan1', 'laluan2', 'laluanFail']) $(id).value = '';
-  $('failKunci').value = ''; $('sediaBaru').hidden = true; $('sediaLama').hidden = true;
-  mesej('mesejBuka', ''); mesej('sediaMesej', ''); mesej('mesejKunci', nota || '', 'ok');
-  kemasKiniKunciUI();
+  KUNCI = k; OBJ_SEMASA = obj; MOD = 'log'; AKTIVITI = Date.now();
+  kosongkanBorang(); $('namaE').value = NAMA;
+  papar(); mesej('mesejApp', nota || '', 'ok');
   await hantarTunggak();
   await muatDaftar();
   $('permintaan').focus();
 }
+async function logMasuk() {
+  const nama = $('nama').value.trim().toLowerCase(), laluan = $('laluan').value;
+  if (!POLA_NAMA.test(nama) || !laluan) return mesej('mesejLog', 'Masukkan nama pengguna dan kata laluan.', 'ralat');
+  const btn = $('btnMasuk'); btn.disabled = true; btn.textContent = 'Menyemak…'; mesej('mesejLog', '');
+  try {
+    const { garam } = await api('pra', { nama });
+    const auth = await terbitAuth(laluan, unb64(garam));
+    const j = await api('masuk', { nama, auth });
+    NAMA = j.nama;
+    if (!j.blob) { MOD = 'sementara'; kosongkanBorang(); papar(); $('namaBaru').focus(); return; }
+    let k; try { k = await bukaFail(j.blob, laluan); } catch { throw { teks: 'Kunci di pelayan tidak dapat dibuka dengan kata laluan ini. Tetapkan semula dengan fail kunci.' }; }
+    await selepasBuka(k, j.blob, '');
+  } catch (e) { mesej('mesejLog', e && e.teks ? e.teks : ralatApi(e), 'ralat'); $('laluan').select(); }
+  finally { btn.disabled = false; btn.textContent = 'Log masuk'; }
+}
+$('borangLog').addEventListener('submit', e => { e.preventDefault(); logMasuk(); });
+$('btnLupa').addEventListener('click', () => { MOD = 'lupa'; kosongkanBorang(); papar(); $('namaBaru').focus(); });
+$('btnBatalSedia').addEventListener('click', () => logKeluar(''));
+$('btnLogKeluar').addEventListener('click', () => logKeluar(''));
 
 $('failKunci').addEventListener('change', async e => {
-  const f = e.target.files[0]; FAIL_DIPILIH = null;
-  $('sediaBaru').hidden = true; $('sediaLama').hidden = true; $('btnSedia').disabled = true; mesej('sediaMesej', '');
+  const f = e.target.files[0]; FAIL_DIPILIH = null; $('sediaLama').hidden = true; mesej('sediaMesej', '');
   if (!f) return;
   try { const o = JSON.parse(await f.text()); if (!o || o.format !== 'MSIMS-KUNCI-1' || !o.awam || !(o.rahsia || o.enc)) throw 0; FAIL_DIPILIH = o; }
   catch { return mesej('sediaMesej', 'Fail ini bukan fail kunci MSIMS. Pilih MSIMS-KunciRahsia-ASAL.json atau MSIMS-KunciRahsia-dilindungi.json.', 'ralat'); }
   if (String(FAIL_DIPILIH.awam).toLowerCase() !== KUNCI_AWAM_SIM) { FAIL_DIPILIH = null; return mesej('sediaMesej', 'Fail kunci ini bukan pasangan kunci yang terbina dalam simulator MSIMS semasa.', 'ralat'); }
-  $('sediaLama').hidden = !FAIL_DIPILIH.enc; $('sediaBaru').hidden = false;
-  mesej('sediaMesej', FAIL_DIPILIH.enc ? 'Fail kunci dilindungi. Masukkan kata laluan fail itu, kemudian kata laluan untuk laman ini (boleh sama).' : 'Fail ASAL (belum dilindungi). Tetapkan kata laluan untuk laman ini.', 'samar');
-  $(FAIL_DIPILIH.enc ? 'laluanFail' : 'laluan1').focus();
-  $('btnSedia').disabled = false;
+  $('sediaLama').hidden = !FAIL_DIPILIH.enc;
+  mesej('sediaMesej', FAIL_DIPILIH.enc ? 'Fail kunci dilindungi: masukkan juga kata laluan fail itu.' : 'Fail kunci diterima.', 'samar');
 });
-$('btnSedia').addEventListener('click', async () => {
-  if (!FAIL_DIPILIH) return mesej('sediaMesej', 'Pilih fail kunci dahulu.', 'ralat');
+$('borangSedia').addEventListener('submit', async e => {
+  e.preventDefault();
+  const nama = $('namaBaru').value.trim().toLowerCase();
+  if (!POLA_NAMA.test(nama)) return mesej('sediaMesej', TEKS_NAMA, 'ralat');
   const r = semakLaluanBaru($('laluan1').value, $('laluan2').value); if (r) return mesej('sediaMesej', r, 'ralat');
+  if (!FAIL_DIPILIH) return mesej('sediaMesej', 'Pilih fail kunci rahsia dahulu.', 'ralat');
   const btn = $('btnSedia'); btn.disabled = true; btn.textContent = 'Memproses…';
   try {
     let k;
     try { k = await bukaFail(FAIL_DIPILIH, $('laluanFail').value); } catch { throw { teks: FAIL_DIPILIH.enc ? 'Kata laluan fail kunci salah, atau fail rosak.' : 'Fail kunci rosak.' }; }
     const dariAsal = !!FAIL_DIPILIH.rahsia;
-    const obj = await daftarAkaun(k, $('laluan1').value);
-    await selepasBuka(k, obj, 'Kata laluan ditetapkan. Mana-mana peranti kini hanya perlu kata laluan ini.' + (dariAsal ? ' Muat turun sandaran kunci di bahagian Lanjutan, kemudian PADAM fail ASAL.' : ''));
-  } catch (e) {
-    mesej('sediaMesej', e && e.teks ? e.teks : ralatApi(e), 'ralat');
-  } finally { btn.disabled = !FAIL_DIPILIH; btn.textContent = 'Simpan & buka kunci'; }
+    const obj = await daftarAkaun(k, nama, $('laluan1').value);
+    NAMA = nama;
+    await selepasBuka(k, obj, 'Nama pengguna dan kata laluan ditetapkan. Mana-mana peranti kini hanya perlu log masuk.' + (dariAsal ? ' Muat turun sandaran kunci di bahagian Lanjutan, kemudian PADAM fail ASAL.' : ''));
+  } catch (err) {
+    mesej('sediaMesej', err && err.teks ? err.teks : ralatApi(err), 'ralat');
+  } finally { btn.disabled = false; btn.textContent = 'Simpan & masuk'; }
 });
-async function bukaDenganLaluan() {
-  if (!STATUS || !STATUS.sedia) return;
-  const laluan = $('laluan').value; if (!laluan) return mesej('mesejBuka', 'Masukkan kata laluan.', 'ralat');
-  const btn = $('btnBuka'); btn.disabled = true; btn.textContent = 'Membuka…'; mesej('mesejBuka', '');
-  try {
-    const auth = await terbitAuth(laluan, unb64(STATUS.garam));
-    const { blob } = await api('masuk', { auth });
-    let k; try { k = await bukaFail(blob, laluan); } catch { throw { teks: 'Kunci di pelayan tidak dapat dibuka dengan kata laluan ini. Tetapkan semula dengan fail kunci.' }; }
-    STATUS.log = true;
-    await selepasBuka(k, blob, '');
-  } catch (e) {
-    if (e && e.kod === 'belum') { STATUS = null; await muatStatus(); }
-    mesej('mesejBuka', e && e.teks ? e.teks : ralatApi(e), 'ralat'); $('laluan').select();
-  } finally { btn.disabled = false; btn.textContent = 'Buka'; }
-}
-$('btnBuka').addEventListener('click', bukaDenganLaluan);
-$('laluan').addEventListener('keydown', e => { if (e.key === 'Enter') bukaDenganLaluan(); });
-$('btnTukarFail').addEventListener('click', () => { PAKSA_SEDIA = true; kemasKiniKunciUI(); });
-$('btnBatalSedia').addEventListener('click', () => { PAKSA_SEDIA = false; kemasKiniKunciUI(); });
-$('btnKunciSemula').addEventListener('click', () => kunciSemula(''));
-$('btnCubaStatus').addEventListener('click', () => muatStatus());
 for (const ev of ['pointerdown', 'keydown']) addEventListener(ev, () => { AKTIVITI = Date.now(); }, { passive: true });
-setInterval(() => { if (KUNCI && Date.now() - AKTIVITI > MASA_KUNCI_AUTO) kunciSemula('Dikunci semula selepas 15 minit tanpa aktiviti.'); }, 20000);
-async function muatStatus() {
-  mesej('mesejMula', 'Menyambung ke pelayan…', 'samar'); $('btnCubaStatus').hidden = true;
-  try { const s = await api('status'); STATUS = { sedia: !!s.sedia, garam: s.garam, log: !!s.log }; mesej('mesejMula', ''); }
-  catch (e) { STATUS = null; mesej('mesejMula', ralatApi(e), 'ralat'); $('btnCubaStatus').hidden = false; }
-  kemasKiniKunciUI();
-  if (STATUS && STATUS.sedia && !KUNCI) $('laluan').focus();
-}
+setInterval(() => { if (KUNCI && Date.now() - AKTIVITI > MASA_KUNCI_AUTO) logKeluar('Log keluar automatik selepas 15 minit tanpa aktiviti.'); }, 20000);
 
 // ===================== borang jana =====================
 function isiProduk() {
@@ -989,7 +977,7 @@ async function tambahRekod(r) {
   try { await api('tambah', { rekod: r }); mesej('mesejDaftar', ''); }
   catch (e) {
     simpanTunggak([r, ...tunggak().filter(x => x.id !== r.id)]);
-    mesej('mesejDaftar', 'Lesen ini sah dan boleh dihantar, tetapi rekodnya belum disimpan di pelayan (' + ralatApi(e) + ') Ia akan dihantar semula apabila anda buka kunci lagi.', 'ralat');
+    mesej('mesejDaftar', 'Lesen ini sah dan boleh dihantar, tetapi rekodnya belum disimpan di pelayan (' + ralatApi(e) + ') Ia akan dihantar semula apabila anda log masuk lagi.', 'ralat');
   }
 }
 function lukisDaftar() {
@@ -1000,7 +988,7 @@ function lukisDaftar() {
   const ul = $('senaraiDaftar'); ul.innerHTML = '';
   if (!tapis.length) {
     const li = document.createElement('li'); li.className = 'kosong';
-    li.textContent = !KUNCI ? 'Buka kunci untuk melihat daftar lesen.' : (semua.length ? 'Tiada padanan untuk carian ini.' : 'Belum ada lesen. Setiap lesen yang anda jana disenaraikan di sini, dengan butang untuk salin semula atau hantar WhatsApp.');
+    li.textContent = (semua.length ? 'Tiada padanan untuk carian ini.' : 'Belum ada lesen. Setiap lesen yang anda jana disenaraikan di sini, dengan butang untuk salin semula atau hantar WhatsApp.');
     ul.appendChild(li); return;
   }
   const el = (tag, kelas, teks) => { const e = document.createElement(tag); if (kelas) e.className = kelas; if (teks != null) e.textContent = teks; return e; };
@@ -1033,7 +1021,7 @@ $('btnSandar').addEventListener('click', () => {
   if (!DAFTAR.length) return mesej('mesejDaftar', 'Tiada rekod untuk disandarkan.', 'samar');
   simpanFail('MSIMS-daftar-lesen-sandaran.json', JSON.stringify(DAFTAR, null, 1), 'application/json'); mesej('mesejDaftar', 'Sandaran dimuat turun.', 'ok');
 });
-$('btnPulih').addEventListener('click', () => { if (!KUNCI) return mesej('mesejDaftar', 'Buka kunci dahulu.', 'ralat'); $('failPulih').click(); });
+$('btnPulih').addEventListener('click', () => { $('failPulih').click(); });
 $('failPulih').addEventListener('change', async e => {
   const f = e.target.files[0]; e.target.value = ''; if (!f) return;
   let a; try { a = JSON.parse(await f.text()); if (!Array.isArray(a)) throw 0; } catch { return mesej('mesejDaftar', 'Fail sandaran tidak sah.', 'ralat'); }
@@ -1071,11 +1059,13 @@ $('btnSemak').addEventListener('click', async () => {
 });
 $('btnTukar').addEventListener('click', async () => {
   if (!KUNCI) return;
+  const nama = $('namaE').value.trim().toLowerCase();
+  if (!POLA_NAMA.test(nama)) return mesej('mesejEksport', TEKS_NAMA, 'ralat');
   const r = semakLaluanBaru($('laluanE1').value, $('laluanE2').value); if (r) return mesej('mesejEksport', r, 'ralat');
   const btn = $('btnTukar'); btn.disabled = true; btn.textContent = 'Menukar…';
-  try { OBJ_SEMASA = await daftarAkaun(KUNCI, $('laluanE1').value); $('laluanE1').value = ''; $('laluanE2').value = ''; mesej('mesejEksport', 'Kata laluan ditukar. Semua peranti kini menggunakan kata laluan baharu.', 'ok'); }
+  try { OBJ_SEMASA = await daftarAkaun(KUNCI, nama, $('laluanE1').value); NAMA = nama; $('laluanE1').value = ''; $('laluanE2').value = ''; mesej('mesejEksport', 'Nama pengguna dan kata laluan ditukar. Semua peranti kini menggunakan yang baharu.', 'ok'); }
   catch (e) { mesej('mesejEksport', ralatApi(e), 'ralat'); }
-  finally { btn.textContent = 'Tukar kata laluan'; kemasKiniKunciUI(); }
+  finally { btn.textContent = 'Simpan nama pengguna & kata laluan'; papar(); }
 });
 $('btnSandarKunci').addEventListener('click', () => {
   if (!OBJ_SEMASA) return;
@@ -1089,6 +1079,6 @@ isiProduk();
 $('tamatTempoh').value = isoTambahBulan(3);
 { const d = new Date(); d.setMonth(d.getMonth() + 12); $('tamatSuai').value = d.toISOString().slice(0, 10); }
 tukarJenis();
-kemasKiniKunciUI();
+papar();
 lukisDaftar();
-muatStatus();
+$('nama').focus();

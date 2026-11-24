@@ -113,3 +113,9 @@ code.awam{display:block;font:500 12px/1.5 var(--f-mono);word-break:break-all;bac
 .kecil{font-size:13.5px;margin:0}
 .atas-0{margin-top:0}
 .bil{font:500 13px var(--f-badan);letter-spacing:0;text-transform:none}
+.pintu{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding-block:24px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.pintu-kad{width:100%;max-width:440px;padding:26px 24px}
+.pintu-kad .jenama{margin-bottom:10px;padding-bottom:12px;border-bottom:2px solid var(--dakwat)}
+.pintu-kad .jenama h1{font-size:28px;margin-top:4px}
+.kepala button{min-height:38px;padding:8px 14px}
+.kepala .cip{text-transform:none;letter-spacing:.02em}

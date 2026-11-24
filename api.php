@@ -9,6 +9,7 @@ const HOS_DIBENAR = 'license.msims.tech';
 const SESI_MAKS = 43200;          // 12 jam
 const PENGAWAL = "<?php http_response_code(404); exit; ?>\n";
 const AB32 = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+const HASH_MULA = 'd09eba48ab9b9690a7de61053d49790eb7f20518f939455c50bc51eb022be7ad';   // SHA-256 token sekali guna untuk akaun sementara pertama
 
 function hantar(int $kod, array $d): void
 {
@@ -16,6 +17,7 @@ function hantar(int $kod, array $d): void
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-Control: no-store');
     header('X-Content-Type-Options: nosniff');
+    header('X-Robots-Tag: noindex, nofollow, noarchive, nosnippet');
     echo json_encode($d, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     exit;
 }
@@ -179,10 +181,46 @@ function rekod_bersih($r)
         'had' => teks($r['had'] ?? '', 16), 'id' => $id, 'catatan' => teks($r['catatan'] ?? '', 200), 'kunci' => $kunci];
 }
 
+function nama_bersih($v)
+{
+    $n = strtolower(trim(is_string($v) ? $v : ''));
+    return preg_match('/^[a-z0-9._-]{3,32}$/', $n) ? $n : null;
+}
+function rahsia_pelayan(): string   // untuk garam olok-olok, supaya nama pengguna tidak boleh diteka melalui API
+{
+    return dengan_kunci(function () {
+        $r = baca('rahsia', null);
+        if (!is_array($r) || strlen(b64($r['k'] ?? '')) !== 32) { $r = ['k' => base64_encode(random_bytes(32))]; tulis('rahsia', $r); }
+        return b64($r['k']);
+    });
+}
+
 // ---------- tindakan ----------
 if ($aksi === 'status') {
+    hantar(200, ['ok' => true, 'log' => sudah_log()]);
+}
+if ($aksi === 'pra') {      // garam pengesahan bagi nama pengguna (garam olok-olok yang tetap jika nama tidak wujud)
+    had_semak();
+    $nama = nama_bersih($masuk['nama'] ?? null);
+    if ($nama === null) hantar(422, ['ralat' => 'nama']);
     $a = baca('akaun', null);
-    hantar(200, ['ok' => true, 'sedia' => $a !== null, 'garam' => $a['garam'] ?? null, 'log' => sudah_log()]);
+    $garam = (is_array($a) && hash_equals((string)($a['nama'] ?? ''), $nama))
+        ? (string)$a['garam']
+        : base64_encode(substr(hash_hmac('sha256', 'garam|' . $nama, rahsia_pelayan(), true), 0, 16));
+    hantar(200, ['ok' => true, 'garam' => $garam]);
+}
+if ($aksi === 'mula') {     // akaun sementara pertama: hanya apabila belum ada akaun, dan hanya dengan token sekali guna
+    had_semak();
+    $nama = nama_bersih($masuk['nama'] ?? null); $auth = (string)($masuk['auth'] ?? ''); $garam = (string)($masuk['garam'] ?? '');
+    if (!hash_equals(HASH_MULA, hash('sha256', (string)($masuk['token'] ?? '')))) { had_gagal(); hantar(403, ['ralat' => 'token']); }
+    if ($nama === null || !preg_match('/^[0-9a-f]{64}$/', $auth) || strlen(b64($garam)) !== 16) hantar(422, ['ralat' => 'data']);
+    $ok = dengan_kunci(function () use ($nama, $garam, $auth) {
+        if (baca('akaun', null) !== null) return false;
+        tulis('akaun', ['v' => 2, 'nama' => $nama, 'garam' => $garam, 'hash' => password_hash($auth, PASSWORD_DEFAULT), 'blob' => null, 'sementara' => true, 'dikemas' => gmdate('c')]);
+        return true;
+    });
+    if (!$ok) hantar(409, ['ralat' => 'sudah']);
+    hantar(200, ['ok' => true]);
 }
 if ($aksi === 'cabaran') {
     had_semak();
@@ -190,17 +228,19 @@ if ($aksi === 'cabaran') {
     $_SESSION['cabaran'] = ['n' => $n, 't' => time()];
     hantar(200, ['ok' => true, 'nonce' => $n]);
 }
-if ($aksi === 'sedia') {   // tetapkan / tukar kata laluan: hanya pemegang kunci rahsia boleh (tandatangan cabaran)
+if ($aksi === 'sedia') {   // tetapkan / tukar nama pengguna & kata laluan: hanya pemegang kunci rahsia boleh (tandatangan cabaran)
     had_semak();
     $c = $_SESSION['cabaran'] ?? null; unset($_SESSION['cabaran']);
     $nonce = (string)($masuk['nonce'] ?? ''); $auth = (string)($masuk['auth'] ?? ''); $garam = (string)($masuk['garam'] ?? '');
+    $nama = nama_bersih($masuk['nama'] ?? null);
     $blob = blob_bersih($masuk['blob'] ?? null); $tt = b64($masuk['tandatangan'] ?? '');
     if (!is_array($c) || !hash_equals((string)$c['n'], $nonce) || time() - (int)$c['t'] > 300) hantar(400, ['ralat' => 'cabaran']);
+    if ($nama === null) hantar(422, ['ralat' => 'nama']);
     if ($blob === null || !preg_match('/^[0-9a-f]{64}$/', $auth) || strlen(b64($garam)) !== 16 || strlen($tt) !== 64) hantar(422, ['ralat' => 'data']);
-    $mesej = "MSIMS-LESEN-SEDIA\n$nonce\n$auth\n" . $blob['enc']['data'];
+    $mesej = "MSIMS-LESEN-SEDIA\n$nonce\n$nama\n$auth\n" . $blob['enc']['data'];
     if (!sodium_crypto_sign_verify_detached($tt, $mesej, hex2bin(KUNCI_AWAM))) { had_gagal(); hantar(403, ['ralat' => 'tandatangan']); }
-    dengan_kunci(function () use ($garam, $auth, $blob) {
-        tulis('akaun', ['v' => 1, 'garam' => $garam, 'hash' => password_hash($auth, PASSWORD_DEFAULT), 'blob' => $blob, 'dikemas' => gmdate('c')]);
+    dengan_kunci(function () use ($nama, $garam, $auth, $blob) {
+        tulis('akaun', ['v' => 2, 'nama' => $nama, 'garam' => $garam, 'hash' => password_hash($auth, PASSWORD_DEFAULT), 'blob' => $blob, 'sementara' => false, 'dikemas' => gmdate('c')]);
     });
     had_berjaya();
     session_regenerate_id(true);
@@ -210,13 +250,16 @@ if ($aksi === 'sedia') {   // tetapkan / tukar kata laluan: hanya pemegang kunci
 if ($aksi === 'masuk') {
     had_semak();
     $a = baca('akaun', null);
-    if ($a === null) hantar(409, ['ralat' => 'belum']);
-    $auth = (string)($masuk['auth'] ?? '');
-    if (!preg_match('/^[0-9a-f]{64}$/', $auth) || !password_verify($auth, (string)$a['hash'])) { had_gagal(); hantar(401, ['ralat' => 'laluan']); }
+    $nama = nama_bersih($masuk['nama'] ?? null); $auth = (string)($masuk['auth'] ?? '');
+    $sah = is_array($a) && $nama !== null && preg_match('/^[0-9a-f]{64}$/', $auth) === 1;
+    $namaOk = $sah && hash_equals((string)($a['nama'] ?? ''), $nama);
+    // sentiasa jalankan semakan hash supaya masa jawapan tidak mendedahkan sama ada nama pengguna wujud
+    $laluanOk = password_verify($sah ? $auth : 'x', is_array($a) ? (string)$a['hash'] : '$2y$10$abcdefghijklmnopqrstuuJ8Gq0s2iZQ9o1b8XvG0rXqkq7p0V1y2');
+    if (!$namaOk || !$laluanOk) { had_gagal(); hantar(401, ['ralat' => 'laluan']); }
     had_berjaya();
     session_regenerate_id(true);
     $_SESSION['log'] = time();
-    hantar(200, ['ok' => true, 'blob' => $a['blob']]);
+    hantar(200, ['ok' => true, 'nama' => $a['nama'], 'blob' => $a['blob'] ?? null, 'sementara' => !empty($a['sementara'])]);
 }
 if ($aksi === 'keluar') {
     $_SESSION = [];
